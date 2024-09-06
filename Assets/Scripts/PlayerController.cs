@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     void WeaponPickUp()
     {
-        Weapons = Physics.OverlapSphere(transform.position, RadiusCheckWeapon, WeaponMask);
+        Weapons = Physics.OverlapSphere(transform.position, RadiusCheckWeapon);
         if (Weapons.Length != 0)
         {
             for (int i = 0; i < PlayerWeapons.Length; i++)
