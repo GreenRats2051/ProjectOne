@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public float Speed; //Скорость игрока
     public float RadiusCheckWeapon; //Радиус поднятия оружия
 
+
+
     void Start()
     {
         ArmorSlider.maxValue = MaxArmor;
@@ -62,14 +64,14 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i < PlayerWeapons.Length; i++)
             {
-                if (Weapons[0].name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].IsHavyPlayer == false)
+                if (Weapons[0].name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].IsHavePlayer == false)
                 {
-                    PlayerWeapons[i].IsHavyPlayer = true;
+                    PlayerWeapons[i].IsHavePlayer = true;
                     PlayerWeapons[i].PlayerWeaponModel.SetActive(true);
-                    Debug.Log("Оружие " + PlayerWeapons[i].PlayerWeaponModel.name + " теперь " + PlayerWeapons[i].IsHavyPlayer);
+                    Debug.Log("Оружие " + PlayerWeapons[i].PlayerWeaponModel.name + " теперь " + PlayerWeapons[i].IsHavePlayer);
                     Destroy(Weapons[0]);
                 }
-                else if (Weapons[0].name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].GunController.Magazine != PlayerWeapons[i].GunController.MaxMagazine && PlayerWeapons[i].IsHavyPlayer == true)
+                else if (Weapons[0].name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].GunController.Magazine != PlayerWeapons[i].GunController.MaxMagazine && PlayerWeapons[i].IsHavePlayer == true)
                 {
                     int RandomMagazine = UnityEngine.Random.Range(1, 3);
                     PlayerWeapons[i].GunController.Magazine += RandomMagazine;
@@ -84,53 +86,113 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //void SelectWeapons()
+    //{
+    //    MouseScroll = Input.GetAxis("Mouse ScrollWheel");
+    //    CurrentWeapon = WeaponSwitch;
+    //    if (MouseScroll > 0)
+    //    {
+    //        if (WeaponSwitch >= PlayerWeapons.Length - 1)
+    //        {
+    //            WeaponSwitch = 0;
+    //        }
+    //        else
+    //        {
+    //            WeaponSwitch++;
+    //        }
+    //    }
+    //    else if (MouseScroll < 0)
+    //    {
+    //        if (WeaponSwitch <= 0)
+    //        {
+    //            WeaponSwitch = PlayerWeapons.Length - 1;
+    //        }
+    //        else
+    //        {
+    //            WeaponSwitch--;
+    //        }
+    //    }
+    //    if (CurrentWeapon != WeaponSwitch)
+    //    {
+    //        for (int i = 0; i < PlayerWeapons.Length; i++)
+    //        {
+    //            if (i == WeaponSwitch)
+    //            {
+    //                PlayerWeapons[i].PlayerWeaponModel.SetActive(true);
+    //            }
+    //            else
+    //            {
+    //                PlayerWeapons[i].PlayerWeaponModel.SetActive(false);
+    //            }
+    //        }
+    //    }
+    //}
     void SelectWeapons()
     {
         MouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        CurrentWeapon = WeaponSwitch;
+        int initialWeaponSwitch = WeaponSwitch; 
+        bool weaponSelected = false;
         if (MouseScroll > 0)
         {
-            if (WeaponSwitch >= PlayerWeapons.Length - 1)
+            do
             {
-                WeaponSwitch = 0;
-            }
-            else
-            {
-                WeaponSwitch++;
-            }
+                PlayerWeapons[WeaponSwitch].PlayerWeaponModel.SetActive(false);
+                WeaponSwitch = (WeaponSwitch + 1) % PlayerWeapons.Length;
+                if (PlayerWeapons[WeaponSwitch].IsHavePlayer)
+                {
+                    weaponSelected = true;
+                }
+                if (WeaponSwitch == initialWeaponSwitch)
+                    break;
+
+            } while (!weaponSelected);
+            WeaponCheck();
         }
         else if (MouseScroll < 0)
         {
-            if (WeaponSwitch <= 0)
+            do
             {
-                WeaponSwitch = PlayerWeapons.Length - 1;
-            }
-            else
-            {
-                WeaponSwitch--;
-            }
+                PlayerWeapons[WeaponSwitch].PlayerWeaponModel.SetActive(false);
+                WeaponSwitch = (WeaponSwitch - 1 + PlayerWeapons.Length) % PlayerWeapons.Length;
+                if (PlayerWeapons[WeaponSwitch].IsHavePlayer)
+                {
+                    weaponSelected = true;
+                }
+                WeaponSwitchReset();
+                if (WeaponSwitch == initialWeaponSwitch)
+                    break;
+
+            } while (!weaponSelected);
+            WeaponCheck();
         }
-        if (CurrentWeapon != WeaponSwitch)
+
+    
+        void WeaponSwitchReset()
         {
-            for (int i = 0; i < PlayerWeapons.Length; i++)
+                if (WeaponSwitch < 0)
+                {
+                    WeaponSwitch = PlayerWeapons.Length - 1;
+
+                }
+
+        }
+        void WeaponCheck()
+        {
+
+            if (weaponSelected)
             {
-                if (i == WeaponSwitch)
-                {
-                    PlayerWeapons[i].PlayerWeaponModel.SetActive(true);
-                }
-                else
-                {
-                    PlayerWeapons[i].PlayerWeaponModel.SetActive(false);
-                }
+                PlayerWeapons[WeaponSwitch].PlayerWeaponModel.SetActive(true);
             }
         }
+
     }
 }
+
 
 [Serializable]
 public class Weapon
 {
     public GameObject PlayerWeaponModel;
     public GunController GunController;
-    public bool IsHavyPlayer;
+    public bool IsHavePlayer;
 }
