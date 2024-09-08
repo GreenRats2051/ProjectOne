@@ -13,14 +13,17 @@ public class PlayerController : MonoBehaviour
     public Vector3 Point; //Точка мыши
     private Vector2 InputAction; //Нажатие вверх, вниз, влево, впрао
     private Collider[] Weapons; //Ближайшее оружие
-    public Slider ArmorSlider;
-    public Slider HealthSlider;
+    public Slider ArmorSlider; //Слайдер брони
+    public Slider HealthSlider; //Слайдер здоровья
     public Rigidbody Rigidbody; //Rigidbody игрока
     public Weapon[] PlayerWeapons; //Оружие игрока
     public int Armor; //Броня игрока
     public int MaxArmor; //Максимальная броня игрока
     public int Health; //Здоровье игрока
     public int MaxHealth; //Максимальное здоровье игрока
+    private int WeaponSwitch; //
+    private int CurrentWeapon; //Текущее выбранное оружие
+    private float MouseScroll; //Прокручивание колеса мыши
     public float Speed; //Скорость игрока
     public float RadiusCheckWeapon; //Радиус поднятия оружия
 
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         Movement(); //Передвижение
         WeaponPickUp(); //Поднятие оружия
+        SelectWeapons(); //Смена оружия
     }
 
     void Movement()
@@ -72,7 +76,49 @@ public class PlayerController : MonoBehaviour
                     Debug.Log("Добавлено " + RandomMagazine + " магазинов к " + PlayerWeapons[i].PlayerWeaponModel.name);
                     Destroy(Weapons[0]);
                 }
-                else if (Weapons[0].name != PlayerWeapons[i].PlayerWeaponModel.name)
+                else
+                {
+                    PlayerWeapons[i].PlayerWeaponModel.SetActive(false);
+                }
+            }
+        }
+    }
+
+    void SelectWeapons()
+    {
+        MouseScroll = Input.GetAxis("Mouse ScrollWheel");
+        CurrentWeapon = WeaponSwitch;
+        if (MouseScroll > 0)
+        {
+            if (WeaponSwitch >= PlayerWeapons.Length - 1)
+            {
+                WeaponSwitch = 0;
+            }
+            else
+            {
+                WeaponSwitch++;
+            }
+        }
+        else if (MouseScroll < 0)
+        {
+            if (WeaponSwitch <= 0)
+            {
+                WeaponSwitch = PlayerWeapons.Length - 1;
+            }
+            else
+            {
+                WeaponSwitch--;
+            }
+        }
+        if (CurrentWeapon != WeaponSwitch)
+        {
+            for (int i = 0; i < PlayerWeapons.Length; i++)
+            {
+                if (i == WeaponSwitch)
+                {
+                    PlayerWeapons[i].PlayerWeaponModel.SetActive(true);
+                }
+                else
                 {
                     PlayerWeapons[i].PlayerWeaponModel.SetActive(false);
                 }

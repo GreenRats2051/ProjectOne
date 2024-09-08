@@ -27,17 +27,14 @@ public class GunController : MonoBehaviour
 
     void Start()
     {
-        WeaponName.text = transform.name;
-        AmmoSlider.value = Ammo;
-        AmmoSlider.maxValue = MaxAmmo;
-        MagazineSlider.value = Magazine;
-        MagazineSlider.maxValue = MaxMagazine;
+
     }
 
     void Update()
     {
-        Shoot();
-        Reload();
+        Shoot(); //Стрельба
+        Reload(); //Перезарядка
+        GunUi(); //UI оружия
     }
 
     void Shoot()
@@ -70,6 +67,18 @@ public class GunController : MonoBehaviour
             MagazineSlider.value = Magazine;
             Ammo = MaxAmmo;
             AmmoSlider.value = Ammo;
+        }
+    }
+
+    void GunUi()
+    {
+        if (gameObject.activeSelf)
+        {
+            WeaponName.text = transform.name;
+            AmmoSlider.value = Ammo;
+            AmmoSlider.maxValue = MaxAmmo;
+            MagazineSlider.value = Magazine;
+            MagazineSlider.maxValue = MaxMagazine;
         }
     }
 }
