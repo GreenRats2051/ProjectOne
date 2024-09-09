@@ -15,13 +15,13 @@ public class CameraSwitch : MonoBehaviour
         {
 
             framingCamera.Priority = 20;
-            thirdPersonCamera.Priority = 10;
+            thirdPersonCamera.Priority = 30;
         }
         else
         {
 
             thirdPersonCamera.Priority = 20;
-            framingCamera.Priority = 10;
+            framingCamera.Priority = 30;
         }
     }
 }

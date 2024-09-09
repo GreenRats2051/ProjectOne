@@ -34,50 +34,61 @@ public class EnemyStats : MonoBehaviour
 
     private void Update()
     {
-
-        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, _attackRadius);
-
-            foreach (Collider collider in hitColliders)
+        if (gameObject != null)
+        {
+            if (!_isTrigered)
             {
-                if (collider.transform.tag == "Player")
+                Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, _attackRadius);
+                foreach (Collider collider in hitColliders)
                 {
-                    if (Vector3.Angle(gameObject.transform.forward, collider.transform.position - transform.position) < 90)   
+                    if (collider.transform.tag == "Player")
                     {
-                        player = collider.transform.gameObject;
-                        _attack = true;
-                        break;
+                        if (Vector3.Angle(gameObject.transform.forward, collider.transform.position - transform.position) < 90)
+                        {
+                            player = collider.transform.gameObject;
+                            _isTrigered = true;
+                            break;
+                        }
+                        else
+                        {
+                            _isTrigered = false;
+                        }
                     }
                     else
                     {
-                        _attack = false;
+                        _isTrigered = false;
                     }
                 }
-                else
-                {
-                    _attack = false;
-                }
             }
-        
-        Attacking();
-        Patrol();
+
+
+            Attacking();
+            Patrol();
+
+        }
 
     }
     
     private void Attacking()
     {
-        if (_attack)
+        if (_isTrigered)
         {
 
             agent.SetDestination(player.transform.position);
             if (!agent.pathPending && agent.remainingDistance < _MeleeDictance)
             {
+                EnemyMelee.IsOnAttackDistance = true;
                 agent.ResetPath();
+            }
+            else
+            {
+                EnemyMelee.IsOnAttackDistance = false;
             }
         }
     }
     private void Patrol()
     {
-        if (_patrol&&!_attack)
+        if (_patrol&&!_isTrigered)
         {
             if (points.Count > 0)
             {
