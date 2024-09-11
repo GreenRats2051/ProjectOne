@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class EnemyMelee : MonoBehaviour
 {
     [SerializeField]
-   private Animator Animator;
+    private Animator Animator;
     [SerializeField]
     private NavMeshAgent agent;
     internal static bool IsOnAttackDistance;
-
 
     private AnimatorStateInfo stateInfo;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
-            //удар
+            // удар
         }
     }
+
     void Update()
     {
         stateInfo = Animator.GetCurrentAnimatorStateInfo(0);
@@ -32,18 +31,28 @@ public class EnemyMelee : MonoBehaviour
         {
             Animator.SetBool("IsRunning", false);
         }
+
         if (IsOnAttackDistance)
         {
-            Animator.SetTrigger("Attack");
+            Animator.SetBool("Attack", true);
+            agent.isStopped = true; 
+        }
+        else
+        {
+            Animator.SetBool("Attack", false);
+            agent.isStopped = false; 
         }
     }
+
     private void LateUpdate()
     {
         if (stateInfo.IsName("Melee"))
         {
-            agent.ResetPath();
+            agent.isStopped = true; 
+        }
+        else
+        {
+            agent.isStopped = false;
         }
     }
-
 }
-

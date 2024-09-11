@@ -68,21 +68,22 @@ public class EnemyStats : MonoBehaviour
         }
 
     }
-    
+
     private void Attacking()
     {
         if (_isTrigered)
         {
-
             agent.SetDestination(player.transform.position);
+
             if (!agent.pathPending && agent.remainingDistance < _MeleeDictance)
             {
                 EnemyMelee.IsOnAttackDistance = true;
-                agent.ResetPath();
+                agent.isStopped = true; 
             }
             else
             {
                 EnemyMelee.IsOnAttackDistance = false;
+                agent.isStopped = false; 
             }
         }
     }
