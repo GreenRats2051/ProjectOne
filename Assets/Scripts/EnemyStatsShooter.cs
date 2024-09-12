@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyStats : MonoBehaviour
+public class EnemyStatsShooter : MonoBehaviour
 {
     [Header("States")]
 
@@ -26,7 +26,8 @@ public class EnemyStats : MonoBehaviour
 
     
     private NavMeshAgent agent;
-    private GameObject player;
+
+    public GameObject Player { get; private set; }
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -45,7 +46,7 @@ public class EnemyStats : MonoBehaviour
                     {
                         if (Vector3.Angle(gameObject.transform.forward, collider.transform.position - transform.position) < 90)
                         {
-                            player = collider.transform.gameObject;
+                            Player = collider.transform.gameObject;
                             _isTrigered = true;
                             break;
                         }
@@ -73,16 +74,16 @@ public class EnemyStats : MonoBehaviour
     {
         if (_isTrigered)
         {
-            agent.SetDestination(player.transform.position);
+            agent.SetDestination(Player.transform.position);
 
             if (!agent.pathPending && agent.remainingDistance < _MeleeDictance)
             {
-                EnemyMelee.IsOnAttackDistance = true;
+                EnemyShooter.IsOnAttackDistance = true;
                 agent.isStopped = true; 
             }
             else
             {
-                EnemyMelee.IsOnAttackDistance = false;
+                EnemyShooter.IsOnAttackDistance = false;
                 agent.isStopped = false; 
             }
         }
