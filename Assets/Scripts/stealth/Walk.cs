@@ -9,7 +9,7 @@ public class Walk : MonoBehaviour
     Collider[] hits;
     void Update()
     {
-        if (gameObject.GetComponent<Liusener>().Iscrouch)
+        if (gameObject.GetComponent<LisenerActiveButton>().Iscrouch)
         {
             hits = Physics.OverlapSphere(gameObject.transform.position, 1f);
         }
