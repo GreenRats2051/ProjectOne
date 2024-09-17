@@ -50,9 +50,9 @@ public class EnemyMelee : EnemyBase
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         animator.SetBool("IsRunning", agent.velocity.magnitude > 0.1f);
         animator.SetBool("Attack", isOnAttackDistance);
+        animator.SetBool("Sleep", _isSleep);
 
-
-        if (stateInfo.IsName("Melee"))
+        if (stateInfo.IsName("Melee")|| stateInfo.IsName("Standing To Crouched"))
         {
             agent.velocity = Vector3.zero;
             agent.isStopped = true;

@@ -10,6 +10,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected GameObject player;
     [SerializeField] protected bool _isTrigered= false;
     [SerializeField] protected bool _isSleep= false;
+    public bool IsSleep { get => _isSleep; set => _isSleep = value; }
     private AIController _agent;
     private Collider[] hitColliders;
     protected abstract void AttackPlayer(); 
@@ -24,19 +25,20 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        Animate();
+        if (_isSleep)
+        {
+            return;
+        }
         CheckPlayerInRange();
         Patrol();
         AttackPlayer();
-        Animate();
         if(player!=null&&_isTrigered)
             _agent.FindPath(gameObject,player.transform,_isTrigered,agent);
     }
     protected void CheckPlayerInRange()
     {
-        if (_isSleep)
-        {
-            return;
-        }
+
 
         hitColliders = Physics.OverlapSphere(transform.position, attackRadius);
         foreach (var hitCollider in hitColliders)
@@ -56,9 +58,17 @@ public abstract class EnemyBase : MonoBehaviour
             }
             else
             {
-                if (hitCollider.CompareTag("Enemy"))
+                if (hitCollider.gameObject.layer == 9)
                 {
-                    hitCollider.GetComponent<EnemyMelee>()._isTrigered = true;
+                    if (hitCollider.TryGetComponent<EnemyMelee>(out EnemyMelee enemyMelee))
+                    {
+                        enemyMelee.IsSleep = false;
+                        
+                    }
+                    if (hitCollider.TryGetComponent<EnemyRange>(out EnemyRange enemyRange))
+                    {
+                        enemyRange.IsSleep = false;
+                    }
                 }
             }
 
