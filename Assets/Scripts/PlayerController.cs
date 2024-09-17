@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Camera MainCamera; //Камера игрока
-    public LayerMask WeaponMask; //Маска оружия
-    public Transform PlayerModel; //Модель игрока
-    public Vector3 Point; //Точка мыши
-    private Vector2 InputAction; //Нажатие вверх, вниз, влево, впрао
-    private Collider[] Weapons; //Ближайшее оружие
-    public Rigidbody Rigidbody; //Rigidbody игрока
-    public Weapon[] PlayerWeapons; //Оружие игрока
-    public float Speed; //Скорость игрока
-    public float RadiusCheckWeapon; //Радиус поднятия оружия
+    public Camera MainCamera; //ГЉГ Г¬ГҐГ°Г  ГЁГЈГ°Г®ГЄГ 
+    public LayerMask WeaponMask; //ГЊГ Г±ГЄГ  Г®Г°ГіГ¦ГЁГї
+    public Transform PlayerModel; //ГЊГ®Г¤ГҐГ«Гј ГЁГЈГ°Г®ГЄГ 
+    public Transform MousePoint; //Г’Г®Г·ГЄГ  Г¬Г»ГёГЁ Г¤Г«Гї ГўГЁГ¤ГЁГ¬Г®Г±ГІГЁ
+    public Vector3 Point; //Г’Г®Г·ГЄГ  Г¬Г»ГёГЁ
+    private Vector2 InputAction; //ГЌГ Г¦Г ГІГЁГҐ ГўГўГҐГ°Гµ, ГўГ­ГЁГ§, ГўГ«ГҐГўГ®, ГўГЇГ°Г Г®
+    private Collider[] Weapons; //ГЃГ«ГЁГ¦Г Г©ГёГҐГҐ Г®Г°ГіГ¦ГЁГҐ
+    public Rigidbody Rigidbody; //Rigidbody ГЁГЈГ°Г®ГЄГ 
+    public Weapon[] PlayerWeapons; //ГЋГ°ГіГ¦ГЁГҐ ГЁГЈГ°Г®ГЄГ 
+    public float Speed; //Г‘ГЄГ®Г°Г®Г±ГІГј ГЁГЈГ°Г®ГЄГ 
+    public float RadiusCheckWeapon; //ГђГ Г¤ГЁГіГ± ГЇГ®Г¤Г­ГїГІГЁГї Г®Г°ГіГ¦ГЁГї
 
     void Start()
     {
@@ -23,8 +24,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Movement(); //Передвижение
-        WeaponPickUp(); //Поднятие оружия
+        Movement(); //ГЏГҐГ°ГҐГ¤ГўГЁГ¦ГҐГ­ГЁГҐ
+        WeaponPickUp(); //ГЏГ®Г¤Г­ГїГІГЁГҐ Г®Г°ГіГ¦ГЁГї
     }
 
     void Movement()
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         {
             Point = new Vector3(RaycastHit.point.x, 1, RaycastHit.point.z);
         }
+        MousePoint.position = Point;
         PlayerModel.LookAt(new Vector3(Point.x, transform.position.y, Point.z));
     }
 
@@ -52,12 +54,12 @@ public class PlayerController : MonoBehaviour
                 {
                     PlayerWeapons[i].IsHavyPlayer = true;
                     PlayerWeapons[i].PlayerWeaponModel.SetActive(true);
-                    Debug.Log("Оружие " + PlayerWeapons[i].PlayerWeaponModel.name + " теперь " + PlayerWeapons[i].IsHavyPlayer);
+                    Debug.Log("ГЋГ°ГіГ¦ГЁГҐ " + PlayerWeapons[i].PlayerWeaponModel.name + " ГІГҐГЇГҐГ°Гј " + PlayerWeapons[i].IsHavyPlayer);
                     Destroy(Weapons[0]);
                 }
                 else if (Weapons[0].name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].IsHavyPlayer == true)
                 {
-                    Debug.Log("Добавлены патроны к " + PlayerWeapons[i].PlayerWeaponModel.name);
+                    Debug.Log("Г„Г®ГЎГ ГўГ«ГҐГ­Г» ГЇГ ГІГ°Г®Г­Г» ГЄ " + PlayerWeapons[i].PlayerWeaponModel.name);
                 }
                 else
                 {
