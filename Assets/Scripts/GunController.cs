@@ -24,12 +24,7 @@ public class GunController : MonoBehaviour
     public float SpreadX; //Разброс пуль по оси X
     public float SpreadY; //Разброс пуль по оси Y
     public float TimeDestroyBullet; //Время уничтожения пули
-
-    void Start()
-    {
-
-    }
-
+    
     void Update()
     {
         Shoot(); //Стрельба
@@ -44,7 +39,7 @@ public class GunController : MonoBehaviour
             TimeShoot = Time.time + 1 / TimeNextShoot;
             Ammo--;
             AmmoSlider.value = Ammo;
-            TargetPoint = new Vector3(PlayerController.Point.x, PlayerController.Point.y + 1, PlayerController.Point.z);
+            TargetPoint = new Vector3(PlayerController.MousePoint.position.x, PlayerController.MousePoint.position.y + 1, PlayerController.MousePoint.position.z);
             Vector3 DirWithoutSpread = TargetPoint - StartShoot.position;
             ForceShoot.x = Random.Range(-SpreadX, SpreadX);
             ForceShoot.y = Random.Range(-SpreadY, SpreadY);
@@ -75,10 +70,10 @@ public class GunController : MonoBehaviour
         if (gameObject.activeSelf)
         {
             WeaponName.text = transform.name;
-            AmmoSlider.value = Ammo;
             AmmoSlider.maxValue = MaxAmmo;
-            MagazineSlider.value = Magazine;
+            AmmoSlider.value = Ammo;
             MagazineSlider.maxValue = MaxMagazine;
+            MagazineSlider.value = Magazine;
         }
     }
 }

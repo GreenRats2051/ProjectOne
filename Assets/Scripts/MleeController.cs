@@ -13,16 +13,11 @@ public class MleeController : MonoBehaviour
     public TMP_Text WeaponName; //Имя оружия
     public Slider AmmoSlider; //Слайдер патрона
     public Slider MagazineSlider; //Слайдер магазина
-
-    void Start()
-    {
-        
-    }
-
+    
     void Update()
     {
-        Attack();
-        MleeUi();
+        Attack(); //Атака
+        MleeUi(); //Ui оружия
     }
 
     void Attack()
