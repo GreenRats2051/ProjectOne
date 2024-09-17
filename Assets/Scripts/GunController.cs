@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
-    public GameObject Bullet; //ГЏГіГ«Гї
-    public Transform StartShoot; //ГЌГ Г·Г Г«Г  ГўГ»Г±ГІГ°ГҐГ«Г 
-    private Vector3 TargetPoint; //Г’Г®Г·ГЄГ  ГўГ»Г±ГІГ°ГҐГ«Г 
-    private Vector2 ForceShoot; //ГЌГ ГЇГ°Г ГўГ«ГҐГ­ГЁГҐ ГўГ»Г±ГІГ°ГҐГ«Г 
-    public PlayerController PlayerController; //PlayerController ГЁГЈГ°Г®ГЄГ 
-    private float TimeShoot; //Г‚Г°ГҐГ¬Гї ГўГ»Г±ГІГ°ГҐГ«Г 
-    public float TimeNextShoot; //Г‚Г°ГҐГ¬Гї Г±Г«ГҐГ¤ГіГѕГ№ГҐГЈГ® ГўГ»Г±ГІГ°ГҐГ«Г  (ГўГ»Г±ГІГ°ГҐГ« Гў Г±ГҐГЄГіГ­Г¤Гі)
-    public float ShootForce; //Г‘ГЄГ®Г°Г®Г±ГІГј ГЇГіГ«ГЁ
-    public float SpreadX; //ГђГ Г§ГЎГ°Г®Г± ГЇГіГ«Гј ГЇГ® Г®Г±ГЁ X
-    public float SpreadY; //ГђГ Г§ГЎГ°Г®Г± ГЇГіГ«Гј ГЇГ® Г®Г±ГЁ Y
-    public float TimeDestroyBullet; //Г‚Г°ГҐГ¬Гї ГіГ­ГЁГ·ГІГ®Г¦ГҐГ­ГЁГї ГЇГіГ«ГЁ
+    public GameObject Bullet; //Пуля
+    public Transform StartShoot; //Начала выстрела
+    private Vector3 TargetPoint; //Точка выстрела
+    private Vector2 ForceShoot; //Направление выстрела
+    public TMP_Text WeaponName; //Имя оружия
+    public Slider AmmoSlider; //Слайдер патрона
+    public Slider MagazineSlider; //Слайдер магазина
+    public PlayerController PlayerController; //PlayerController игрока
+    public int Ammo; //Патроны
+    public int MaxAmmo; //Максимальное количество патронов
+    public int Magazine; //Магазин
+    public int MaxMagazine; //Максимальное количество магазинов
+    private float TimeShoot; //Время выстрела
+    public float TimeNextShoot; //Время следующего выстрела (выстрел в секунду)
+    public float ShootForce; //Скорость пули
+    public float SpreadX; //Разброс пуль по оси X
+    public float SpreadY; //Разброс пуль по оси Y
+    public float TimeDestroyBullet; //Время уничтожения пули
 
     void Start()
     {
@@ -23,10 +32,19 @@ public class GunController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= TimeShoot)
+        Shoot(); //Стрельба
+        Reload(); //Перезарядка
+        GunUi(); //UI оружия
+    }
+
+    void Shoot()
+    {
+        if (Input.GetKey(KeyCode.Mouse0) && Ammo != 0 && Time.time >= TimeShoot)
         {
             TimeShoot = Time.time + 1 / TimeNextShoot;
-            TargetPoint = new Vector3(PlayerController.Point.x, PlayerController.Point.y + 1f, PlayerController.Point.z);
+            Ammo--;
+            AmmoSlider.value = Ammo;
+            TargetPoint = new Vector3(PlayerController.Point.x, PlayerController.Point.y + 1, PlayerController.Point.z);
             Vector3 DirWithoutSpread = TargetPoint - StartShoot.position;
             ForceShoot.x = Random.Range(-SpreadX, SpreadX);
             ForceShoot.y = Random.Range(-SpreadY, SpreadY);
@@ -38,6 +56,29 @@ public class GunController : MonoBehaviour
             Current_Bullet.transform.forward = DirWithSpread.normalized;
             Current_Bullet.GetComponent<Rigidbody>().AddForce(DirWithSpread.normalized * ShootForce, ForceMode.Impulse);
             Destroy(Current_Bullet, TimeDestroyBullet);
+        }
+    }
+
+    void Reload()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && Magazine != 0)
+        {
+            Magazine--;
+            MagazineSlider.value = Magazine;
+            Ammo = MaxAmmo;
+            AmmoSlider.value = Ammo;
+        }
+    }
+
+    void GunUi()
+    {
+        if (gameObject.activeSelf)
+        {
+            WeaponName.text = transform.name;
+            AmmoSlider.value = Ammo;
+            AmmoSlider.maxValue = MaxAmmo;
+            MagazineSlider.value = Magazine;
+            MagazineSlider.maxValue = MaxMagazine;
         }
     }
 }
