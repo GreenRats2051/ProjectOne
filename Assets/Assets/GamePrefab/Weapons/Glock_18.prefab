@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1104568945587135680}
   - component: {fileID: 1693250617357800761}
   - component: {fileID: 3824850406579252072}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Glock_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 5656652478217066373}
   - component: {fileID: 6438726154447676531}
   - component: {fileID: 1488470335551405261}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol4_01_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 1272582563051589692}
   - component: {fileID: 5054191837801049268}
   - component: {fileID: 7478224587009907543}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol4_01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 4395846283368785054}
   - component: {fileID: 5108274562043502815}
   - component: {fileID: 686244337554578476}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol4_01_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 9193218126517361372}
   - component: {fileID: 2770660826417421894}
   - component: {fileID: 6235116219116411932}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol4_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

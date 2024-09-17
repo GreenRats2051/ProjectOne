@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5793334283756372995}
   - component: {fileID: 6228754717569573054}
   - component: {fileID: 7905312056895675079}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle1_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3102051230548126118}
   - component: {fileID: 2063846906055587217}
   - component: {fileID: 4926940251235810430}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle1_01_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5291782447102569682}
   - component: {fileID: 5219909647465301066}
   - component: {fileID: 4680873553938890178}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle1_01_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 6601691325214127177}
   - component: {fileID: 5115200763086488281}
   - component: {fileID: 2513198706741677249}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle1_01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 3943286527086359913}
   - component: {fileID: 4444257299322213683}
   - component: {fileID: 7799445005897546427}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ak_74
   m_TagString: Untagged
   m_Icon: {fileID: 0}

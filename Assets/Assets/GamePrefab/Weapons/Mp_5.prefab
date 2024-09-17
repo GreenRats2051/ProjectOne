@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3565204219045037290}
   - component: {fileID: 1516333480714924070}
   - component: {fileID: 3396804216210722410}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Mp_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1318866627335397858}
   - component: {fileID: 5838513032575246721}
   - component: {fileID: 2693417516858817289}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SMG2_01_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 7940331114535474150}
   - component: {fileID: 4923035507123448266}
   - component: {fileID: 4152480007688271649}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SMG2_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 5947248239332434681}
   - component: {fileID: 5457484143117720135}
   - component: {fileID: 5850592600931039180}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SMG2_01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 2264778163105340458}
   - component: {fileID: 5228897494129635958}
   - component: {fileID: 5141623309466166821}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SMG2_01_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

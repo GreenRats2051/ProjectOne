@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6747466523982321036}
   - component: {fileID: 1422398461953958319}
   - component: {fileID: 3331395579659173087}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ScarL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 6522298292589238112}
   - component: {fileID: 2332356639144192634}
   - component: {fileID: 4732393987081799680}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle6_01_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 4747809342932962260}
   - component: {fileID: 4599961613932358793}
   - component: {fileID: 521235240921671144}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle6_01_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 5750874083283095795}
   - component: {fileID: 7013804713883703730}
   - component: {fileID: 5200180696193110132}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle6_01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 7874873174334763231}
   - component: {fileID: 4858787492735139346}
   - component: {fileID: 7719423537975331965}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: AssaultRifle6_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

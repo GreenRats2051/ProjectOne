@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    public GameObject Bullet; //Пуля
-    public Transform StartShoot; //Начала выстрела
-    public Vector3 TargetPoint; //Точка выстрела
-    public Vector2 ForceShoot; //Направление выстрела
-    public PlayerController PlayerController; //PlayerController игрока
-    public float TimeShoot; //Время выстрела
-    public float TimeNextShoot; //Время следующего выстрела (выстрел в секунду)
-    public float ShootForce; //Скорость пули
-    public float SpreadX; //Разброс пуль по оси X
-    public float SpreadY; //Разброс пуль по оси Y
-    public float TimeDestroyBullet; //Время уничтожения пули
+    public GameObject Bullet; //ГЏГіГ«Гї
+    public Transform StartShoot; //ГЌГ Г·Г Г«Г  ГўГ»Г±ГІГ°ГҐГ«Г 
+    private Vector3 TargetPoint; //Г’Г®Г·ГЄГ  ГўГ»Г±ГІГ°ГҐГ«Г 
+    private Vector2 ForceShoot; //ГЌГ ГЇГ°Г ГўГ«ГҐГ­ГЁГҐ ГўГ»Г±ГІГ°ГҐГ«Г 
+    public PlayerController PlayerController; //PlayerController ГЁГЈГ°Г®ГЄГ 
+    private float TimeShoot; //Г‚Г°ГҐГ¬Гї ГўГ»Г±ГІГ°ГҐГ«Г 
+    public float TimeNextShoot; //Г‚Г°ГҐГ¬Гї Г±Г«ГҐГ¤ГіГѕГ№ГҐГЈГ® ГўГ»Г±ГІГ°ГҐГ«Г  (ГўГ»Г±ГІГ°ГҐГ« Гў Г±ГҐГЄГіГ­Г¤Гі)
+    public float ShootForce; //Г‘ГЄГ®Г°Г®Г±ГІГј ГЇГіГ«ГЁ
+    public float SpreadX; //ГђГ Г§ГЎГ°Г®Г± ГЇГіГ«Гј ГЇГ® Г®Г±ГЁ X
+    public float SpreadY; //ГђГ Г§ГЎГ°Г®Г± ГЇГіГ«Гј ГЇГ® Г®Г±ГЁ Y
+    public float TimeDestroyBullet; //Г‚Г°ГҐГ¬Гї ГіГ­ГЁГ·ГІГ®Г¦ГҐГ­ГЁГї ГЇГіГ«ГЁ
 
     void Start()
     {

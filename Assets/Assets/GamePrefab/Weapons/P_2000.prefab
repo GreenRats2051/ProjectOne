@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9024909439730522528}
   - component: {fileID: 3900970082875566256}
   - component: {fileID: 5753180460322824038}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol3_01_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8510483481272539048}
   - component: {fileID: 6280971168162954412}
   - component: {fileID: 8509725266347765367}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol3_01_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3145985257371933529}
   - component: {fileID: 7604875839117756518}
   - component: {fileID: 7643417604811623960}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol3_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 7903994117772647314}
   - component: {fileID: 7163157461730771303}
   - component: {fileID: 70072144686852280}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol3_01_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 2554417716470189168}
   - component: {fileID: 8924225341039965156}
   - component: {fileID: 9158762636405910920}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol3_01_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 3713356590453743748}
   - component: {fileID: 1359637476714511537}
   - component: {fileID: 2803852638283219079}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Pistol3_01_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   - component: {fileID: 8191417331831231356}
   - component: {fileID: 5311133691972032686}
   - component: {fileID: 1674542597874763446}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: P_2000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
