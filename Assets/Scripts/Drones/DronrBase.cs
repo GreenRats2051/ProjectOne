@@ -5,24 +5,24 @@ using UnityEngine;
 public abstract class DronrBase : MonoBehaviour
 {
     [SerializeField]
-    private int droneLivetime;    
+    private int droneLivetime = 4; 
     [SerializeField]
-    private int droneCoolDownTime;
+    private int droneCoolDownTime = 4; 
     [SerializeField]
     private GameObject prefubDrone;
     [SerializeField]
     private GameObject target;
-    private bool _isActiv;
-    GameObject instDrone;
+    protected GameObject instDrone;
     protected abstract void Interacting();
     private LisenerActiveButton _listener;
-    private bool _isdroneReady;
+    private bool _isdroneReady = true;
 
     protected virtual void Start()
     {
-        if(TryGetComponent<LisenerActiveButton>(out LisenerActiveButton lisener))
+        if (TryGetComponent(out LisenerActiveButton lisener))
         {
             _listener = lisener;
+            _listener.OnDroneActivated += Interacting;
             _listener.OnDroneActivated += CreateDrone;
             _listener.OnDroneDeactivated += DestroyDrone;
         }
@@ -32,6 +32,7 @@ public abstract class DronrBase : MonoBehaviour
     {
         if (_listener != null)
         {
+            _listener.OnDroneActivated -= Interacting;
             _listener.OnDroneActivated -= CreateDrone;
             _listener.OnDroneDeactivated -= DestroyDrone;
         }
@@ -41,30 +42,34 @@ public abstract class DronrBase : MonoBehaviour
     {
         if (_isdroneReady)
         {
-            instDrone = Instantiate(prefubDrone, target.transform.position + new Vector3(1, 0, 0), target.transform.rotation);
+            Debug.Log("Creating drone...");
+            instDrone = Instantiate(prefubDrone, target.transform.position + new Vector3(1, 1, 0), target.transform.rotation);
             instDrone.transform.parent = target.transform;
-            DestroyAfterLifetime();
+            StartCoroutine(DestroyAfterLifetime());
         }
 
     }
+
     private void DestroyDrone()
     {
         if (instDrone != null)
         {
+
             Destroy(instDrone);
+            StartCoroutine(Cooldown());
         }
-        StartCoroutine(Cooldown());
     }
 
     private IEnumerator DestroyAfterLifetime()
     {
-        _isdroneReady = false;
         yield return new WaitForSeconds(droneLivetime);
         DestroyDrone();
     }
+
     private IEnumerator Cooldown()
     {
+        _isdroneReady = false;
         yield return new WaitForSeconds(droneCoolDownTime);
-        _isdroneReady = true;
+        _isdroneReady = true; 
     }
 }
