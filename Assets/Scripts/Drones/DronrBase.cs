@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class DronrBase : MonoBehaviour
 {
@@ -16,9 +17,12 @@ public abstract class DronrBase : MonoBehaviour
     protected abstract void Interacting();
     private LisenerActiveButton _listener;
     private bool _isdroneReady = true;
-
+    [SerializeField]
+    Slider drone;
     protected virtual void Start()
     {
+        drone.maxValue = droneLivetime;
+        drone.value = drone.maxValue;
         if (TryGetComponent(out LisenerActiveButton lisener))
         {
             _listener = lisener;
@@ -40,8 +44,11 @@ public abstract class DronrBase : MonoBehaviour
 
     void CreateDrone()
     {
+
         if (_isdroneReady)
         {
+            drone.maxValue = droneLivetime;
+            drone.value = drone.maxValue;
             Debug.Log("Creating drone...");
             instDrone = Instantiate(prefubDrone, target.transform.position + new Vector3(1, 1, 0), target.transform.rotation);
             instDrone.transform.parent = target.transform;
@@ -54,7 +61,7 @@ public abstract class DronrBase : MonoBehaviour
     {
         if (instDrone != null)
         {
-
+             drone.value = 0;
             Destroy(instDrone);
             StartCoroutine(Cooldown());
         }
@@ -62,14 +69,26 @@ public abstract class DronrBase : MonoBehaviour
 
     private IEnumerator DestroyAfterLifetime()
     {
-        yield return new WaitForSeconds(droneLivetime);
+        for (int i = 0; i < droneLivetime; i++)
+        {
+            drone.value -= 1;
+            yield return new WaitForSeconds(1);
+        }
         DestroyDrone();
     }
 
     private IEnumerator Cooldown()
     {
+        drone.maxValue = droneCoolDownTime;
+        drone.value = 0;
         _isdroneReady = false;
-        yield return new WaitForSeconds(droneCoolDownTime);
+        for(int i =0; i < droneCoolDownTime; i++)
+        {
+            drone.value += 1;
+            yield return new WaitForSeconds(1);
+        }
+
+        
         _isdroneReady = true; 
     }
 }

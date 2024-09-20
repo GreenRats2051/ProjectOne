@@ -60,7 +60,8 @@ public class EnemyRange : EnemyBase
 
     protected override void Animate()
     {
-        if (isOnAttackDistance|| _isShooting)
+        animator.SetBool("Dead", _dead);
+        if ((isOnAttackDistance|| _isShooting)&&!_dead)
         {
             animator.SetBool("Dead", _dead);
             if (Line == null)
