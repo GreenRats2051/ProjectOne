@@ -8,7 +8,7 @@ public class BulletPlayer : MonoBehaviour
     private int bulletPower = 3;
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 9)
+        if (collision.gameObject.layer == 9|| collision.gameObject.layer == 11)
         {
             collision.gameObject.GetComponent<EnemyBase>().GetHit(bulletPower);
         }

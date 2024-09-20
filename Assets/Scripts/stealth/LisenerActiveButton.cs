@@ -12,6 +12,7 @@ public class LisenerActiveButton : MonoBehaviour
     public bool Iscrouch => _iscrouch;
 
     private int smokesValue = 10;// убрать в контролер потом
+    private int DefultValue = 10;// убрать в контролер потом
     [SerializeField]
     private Slider smokesSlider ;// убрать в контролер потом
 
@@ -44,7 +45,11 @@ public class LisenerActiveButton : MonoBehaviour
 
         if (_iscrouch)
         {
-           // _crouch.InvokeCrouch(gameObject);
+            _crouch.InvokeCrouch(gameObject,2);
+        }
+        else
+        {
+            _crouch.InvokeCrouch(gameObject,4);
         }
 
 

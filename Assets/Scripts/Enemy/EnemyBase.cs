@@ -74,7 +74,7 @@ public abstract class EnemyBase : MonoBehaviour
             }
             else
             {
-                if (hitCollider.gameObject.layer == 9)
+                if (hitCollider.gameObject.layer == 9 || hitCollider.gameObject.layer == 11)
                 {
                     if (hitCollider.TryGetComponent<EnemyMelee>(out EnemyMelee enemyMelee))
                     {

@@ -20,7 +20,7 @@ public class Smoke : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
 
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == 9|| other.gameObject.layer == 11)
         {
             other.GetComponent<EnemyBase>().IsSleep = true;
             other.GetComponent<EnemyBase>().IsTrigered = true;

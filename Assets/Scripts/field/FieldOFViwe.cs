@@ -8,11 +8,12 @@ public class FieldOfView : MonoBehaviour
     public int rayCount = 50; // Количество лучей (точек)
     public float viewDistance = 20f; // Дальность обзора
     public LayerMask obstacleMask; // Маска препятствий
-    private List<Transform> visibleEnemies = new List<Transform>(); // Список видимых врагов
+    public LayerMask enemyLayerMask; // Лейер врагов (например, InvisibleEnemy)
+    public LayerMask visibleEnemyLayerMask; // Лейер видимых врагов (VisibleEnemy)
+    private List<Transform> visibleEnemies = new List<Transform>(); // Массив видимых врагов
     private Mesh mesh; // Меш для визуализации поля зрения
     private Vector3 origin; // Позиция начала обзора
     private float startingAngle; // Стартовый угол для расчета лучей
-    public LayerMask enemyMask;
     private void Start()
     {
         mesh = new Mesh();
@@ -97,33 +98,71 @@ public class FieldOfView : MonoBehaviour
         return new Vector3(Mathf.Sin(angleRad), 0, Mathf.Cos(angleRad)); // Рассчитываем направление по углу
     }
     // Метод для управления видимостью врагов
+    private Dictionary<Transform, bool> enemyVisibilityState = new Dictionary<Transform, bool>();
+
+    private float visibilityCooldown = 0.5f; // Задержка в секундах
+    private Dictionary<Transform, float> enemyVisibilityTimers = new Dictionary<Transform, float>();
+
     private void HandleEnemyVisibility()
     {
-        // Сначала скрываем всех врагов, которые не в списке видимых
-        foreach (Transform enemy in visibleEnemies)
+        visibleEnemies.Clear();
+
+        Collider[] enemiesInView = Physics.OverlapSphere(transform.position, viewDistance, enemyLayerMask);
+        float checkRadius = viewDistance + 1f; // Немного увеличиваем радиус
+        foreach (Collider enemyCollider in enemiesInView)
         {
-            SkinnedMeshRenderer[] renderers = enemy.GetComponentsInChildren<SkinnedMeshRenderer>();
-            foreach (var renderer in renderers)
+            Transform enemyTransform = enemyCollider.transform;
+            Vector3 directionToEnemy = (enemyTransform.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToEnemy) < fov / 2f)
             {
-                if (!renderer.enabled) // Проверяем, если рендер выключен
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, directionToEnemy, out hit, viewDistance, obstacleMask | enemyLayerMask))
                 {
-                    renderer.enabled = true; // Включаем рендер
+                    bool isVisible = hit.transform == enemyTransform;
+
+                    if (isVisible)
+                    {
+                        // Если враг виден, включаем все рендереры
+                        Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
+                        foreach (Renderer renderer in enemyRenderers)
+                        {
+                            renderer.enabled = true;
+                        }
+                        visibleEnemies.Add(enemyTransform);
+                        enemyVisibilityTimers[enemyTransform] = Time.time + visibilityCooldown; // Устанавливаем таймер
+                    }
+                    else
+                    {
+                        // Если враг скрыт и время видимости ещё не истекло
+                        if (enemyVisibilityTimers.TryGetValue(enemyTransform, out float endTime) && Time.time < endTime)
+                        {
+                            // Включаем рендереры
+                            Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
+                            foreach (Renderer renderer in enemyRenderers)
+                            {
+                                renderer.enabled = true;
+                            }
+                        }
+                        else
+                        {
+                            // Выключаем рендереры
+                            Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
+                            foreach (Renderer renderer in enemyRenderers)
+                            {
+                                renderer.enabled = false;
+                            }
+                        }
+                    }
                 }
             }
-        }
-
-        // Проходим по всем врагам в сцене, чтобы отключить рендеринг невидимых
-        foreach (var enemy in FindObjectsOfType<Transform>())
-        {
-            if (!visibleEnemies.Contains(enemy))
+            else
             {
-                SkinnedMeshRenderer[] renderers = enemy.GetComponentsInChildren<SkinnedMeshRenderer>();
-                foreach (var renderer in renderers)
+                // Враг вне угла обзора, выключаем все рендереры
+                Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
+                foreach (Renderer renderer in enemyRenderers)
                 {
-                    if (renderer.enabled) // Проверяем, если рендер включен
-                    {
-                        renderer.enabled = false; // Выключаем рендер
-                    }
+                    renderer.enabled = false;
                 }
             }
         }

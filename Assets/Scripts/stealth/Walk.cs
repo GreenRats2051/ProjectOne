@@ -20,7 +20,7 @@ public class Walk : MonoBehaviour
 
         foreach(Collider hit in hits)
         {
-            if(hit.gameObject.layer == 9)
+            if(hit.gameObject.layer == 9|| hit.gameObject.layer == 11)
             {
                 if(hit.TryGetComponent<EnemyBase>(out EnemyBase enemy))
                 {
