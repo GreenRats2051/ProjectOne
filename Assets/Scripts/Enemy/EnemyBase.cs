@@ -6,11 +6,19 @@ public abstract class EnemyBase : MonoBehaviour
 {
     [Header("Base Settings")]
     [SerializeField] protected int attackRadius; 
+    [SerializeField] protected int _power = 1; 
+    [SerializeField] protected int Health=3; 
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected GameObject player;
     [SerializeField] protected bool _isTrigered= false;
-    [SerializeField] protected bool _isSleep= false;
+
+    [SerializeField] protected bool  _isSleep= false;
+    [SerializeField] protected bool _dead= false;
+
+    public GameObject Player  { get => player; set => player = value; }
+    public bool IsTrigered  { get => _isTrigered; set => _isTrigered = value; }
     public bool IsSleep { get => _isSleep; set => _isSleep = value; }
+    public int Power => _power;
     private AIController _agent;
     private Collider[] hitColliders;
     protected abstract void AttackPlayer(); 
@@ -26,15 +34,23 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Update()
     {
         Animate();
-        if (_isSleep)
+        if (!_dead)
         {
-            return;
+            if (_isSleep)
+            {
+                agent.isStopped = true;
+                return;
+            }
+            else
+            {
+                agent.isStopped = false;
+            }
+            CheckPlayerInRange();
+            Patrol();
+            AttackPlayer();
+            if (player != null && _isTrigered)
+                _agent.FindPath(gameObject, player.transform, _isTrigered, agent);
         }
-        CheckPlayerInRange();
-        Patrol();
-        AttackPlayer();
-        if(player!=null&&_isTrigered)
-            _agent.FindPath(gameObject,player.transform,_isTrigered,agent);
     }
     protected void CheckPlayerInRange()
     {
@@ -58,7 +74,7 @@ public abstract class EnemyBase : MonoBehaviour
             }
             else
             {
-                if (hitCollider.gameObject.layer == 9)
+                if (hitCollider.gameObject.layer == 9 || hitCollider.gameObject.layer == 11)
                 {
                     if (hitCollider.TryGetComponent<EnemyMelee>(out EnemyMelee enemyMelee))
                     {
@@ -76,13 +92,19 @@ public abstract class EnemyBase : MonoBehaviour
 
 
     }
-
+    public void GetHit(int damage)
+    {
+        Health -= damage;
+        if (Health == 0)
+        {
+            _dead = true;
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRadius);
 
-        // Отрисовка пути NavMesh агента
         if (agent != null && agent.hasPath)
         {
             Gizmos.color = Color.green;

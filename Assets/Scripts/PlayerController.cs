@@ -6,27 +6,22 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public Camera MainCamera; //Камера игрока
-    public LayerMask WeaponMask; //Маска оружия
-    public Transform PlayerModel; //Модель игрока
-    public Transform MousePoint; //Точка мыши для видимости
-    public Vector3 Point; //Точка мыши
-    private Vector2 InputAction; //Нажатие вверх, вниз, влево, впрао
-    private Collider[] Weapons; //Ближайшее оружие
-    public Slider ArmorSlider; //Слайдер брони
-    public Slider HealthSlider; //Слайдер здоровья
-    public Rigidbody Rigidbody; //Rigidbody игрока
-    public Weapon[] PlayerWeapons; //Оружие игрока
-    public int Armor; //Броня игрока
-    public int MaxArmor; //Максимальная броня игрока
-    public int Health; //Здоровье игрока
-    public int MaxHealth; //Максимальное здоровье игрока
-    private int WeaponSwitch; //
-    private int CurrentWeapon; //Текущее выбранное оружие
-    private float MouseScroll; //Прокручивание колеса мыши
-    public float Speed; //Скорость игрока
-    public float RadiusCheckWeapon; //Радиус поднятия оружия
-
+    public Camera MainCamera; 
+    public Transform PlayerModel;
+    public Transform MousePoint; 
+    private Vector2 InputAction; 
+    public Slider ArmorSlider; 
+    public Slider HealthSlider; 
+    public Rigidbody Rigidbody; 
+    public Weapon[] PlayerWeapons; 
+    public int Armor; 
+    public int MaxArmor; 
+    public int Health; 
+    public int MaxHealth; 
+    private int WeaponSwitch; 
+    private int CurrentWeapon; 
+    private float MouseScroll; 
+    public float Speed; 
 
 
     void Start()
@@ -37,9 +32,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Movement(); //Передвижение
-        WeaponPickUp(); //Поднятие оружия
-        SelectWeapons(); //Смена оружия
+        Movement(); 
+        SelectWeapons();
+        ChangeSliderPlayerLive();
     }
 
     void Movement()
@@ -51,32 +46,28 @@ public class PlayerController : MonoBehaviour
         Ray RayMainCamera = MainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(RayMainCamera, out RaycastHit, Mathf.Infinity))
         {
-            Point = new Vector3(RaycastHit.point.x, 1, RaycastHit.point.z);
+            MousePoint.position = new Vector3(RaycastHit.point.x, 1, RaycastHit.point.z);
         }
-        MousePoint.position = Point;
-        PlayerModel.LookAt(new Vector3(Point.x, transform.position.y, Point.z));
+        PlayerModel.LookAt(new Vector3(MousePoint.position.x, transform.position.y, MousePoint.position.z));
     }
 
-    void WeaponPickUp()
+    void OnTriggerEnter(Collider Collider)
     {
-        Weapons = Physics.OverlapSphere(transform.position, RadiusCheckWeapon);
-        if (Weapons.Length != 0)
+        if (Collider.tag == "Weapon")
         {
             for (int i = 0; i < PlayerWeapons.Length; i++)
             {
-                if (Weapons[0].name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].IsHavePlayer == false)
+                if (Collider.name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].IsHavePlayer == false)
                 {
                     PlayerWeapons[i].IsHavePlayer = true;
                     PlayerWeapons[i].PlayerWeaponModel.SetActive(true);
-                    Debug.Log("Оружие " + PlayerWeapons[i].PlayerWeaponModel.name + " теперь " + PlayerWeapons[i].IsHavePlayer);
-                    Destroy(Weapons[0]);
+                    Destroy(Collider.gameObject);
                 }
-                else if (Weapons[0].name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].GunController.Magazine != PlayerWeapons[i].GunController.MaxMagazine && PlayerWeapons[i].IsHavePlayer == true)
+                else if (Collider.name == PlayerWeapons[i].PlayerWeaponModel.name && PlayerWeapons[i].GunController.Magazine != PlayerWeapons[i].GunController.MaxMagazine && PlayerWeapons[i].IsHavePlayer == true)
                 {
                     int RandomMagazine = UnityEngine.Random.Range(1, 3);
                     PlayerWeapons[i].GunController.Magazine += RandomMagazine;
-                    Debug.Log("Добавлено " + RandomMagazine + " магазинов к " + PlayerWeapons[i].PlayerWeaponModel.name);
-                    Destroy(Weapons[0]);
+                    Destroy(Collider.gameObject);
                 }
                 else
                 {
@@ -85,52 +76,48 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void Healing(int healvalue)
+    {
+        if(Health + healvalue < MaxHealth)
+        {
+            Health += healvalue;
+        }        
 
-    //void SelectWeapons()
-    //{
-    //    MouseScroll = Input.GetAxis("Mouse ScrollWheel");
-    //    CurrentWeapon = WeaponSwitch;
-    //    if (MouseScroll > 0)
-    //    {
-    //        if (WeaponSwitch >= PlayerWeapons.Length - 1)
-    //        {
-    //            WeaponSwitch = 0;
-    //        }
-    //        else
-    //        {
-    //            WeaponSwitch++;
-    //        }
-    //    }
-    //    else if (MouseScroll < 0)
-    //    {
-    //        if (WeaponSwitch <= 0)
-    //        {
-    //            WeaponSwitch = PlayerWeapons.Length - 1;
-    //        }
-    //        else
-    //        {
-    //            WeaponSwitch--;
-    //        }
-    //    }
-    //    if (CurrentWeapon != WeaponSwitch)
-    //    {
-    //        for (int i = 0; i < PlayerWeapons.Length; i++)
-    //        {
-    //            if (i == WeaponSwitch)
-    //            {
-    //                PlayerWeapons[i].PlayerWeaponModel.SetActive(true);
-    //            }
-    //            else
-    //            {
-    //                PlayerWeapons[i].PlayerWeaponModel.SetActive(false);
-    //            }
-    //        }
-    //    }
-    //}
+
+    }
+    public void ChangeSliderPlayerLive()
+    {
+        if(ArmorSlider.value!= Armor)
+        {
+            ArmorSlider.value = Armor;
+        }
+        if (HealthSlider.value != Health)
+        {
+            HealthSlider.value = Health;
+        }
+    }
+    public void GetHit(int damage)
+    {
+        if (Armor != 0&&damage<Armor)
+        {
+            Armor -= damage;
+        }
+        else if(Armor != 0)
+        {
+            damage -= Armor;
+            Armor = 0;
+            Health -= damage;
+        }
+        else
+        {
+            Health -= damage;
+        }
+
+    }
     void SelectWeapons()
     {
         MouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        int initialWeaponSwitch = WeaponSwitch; 
+        int initialWeaponSwitch = WeaponSwitch;
         bool weaponSelected = false;
         if (MouseScroll > 0)
         {
@@ -166,14 +153,14 @@ public class PlayerController : MonoBehaviour
             WeaponCheck();
         }
 
-    
+
         void WeaponSwitchReset()
         {
-                if (WeaponSwitch < 0)
-                {
-                    WeaponSwitch = PlayerWeapons.Length - 1;
+            if (WeaponSwitch < 0)
+            {
+                WeaponSwitch = PlayerWeapons.Length - 1;
 
-                }
+            }
 
         }
         void WeaponCheck()
@@ -187,8 +174,6 @@ public class PlayerController : MonoBehaviour
 
     }
 }
-
-
 [Serializable]
 public class Weapon
 {

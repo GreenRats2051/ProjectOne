@@ -12,8 +12,6 @@ public class EnemyMelee : EnemyBase
     private int currentPatrolIndex = -1;
     private bool isOnAttackDistance;
     AnimatorStateInfo stateInfo;
-
-
     protected override void AttackPlayer()
     {
         if (player != null)
@@ -47,11 +45,17 @@ public class EnemyMelee : EnemyBase
 
     protected override void Animate()
     {
-        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        animator.SetBool("IsRunning", agent.velocity.magnitude > 0.1f);
-        animator.SetBool("Attack", isOnAttackDistance);
-        animator.SetBool("Sleep", _isSleep);
 
+        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+
+        if (!stateInfo.IsName("Dead"))
+        {
+            animator.SetBool("IsRunning", agent.velocity.magnitude > 0.1f);
+            animator.SetBool("Attack", isOnAttackDistance);
+            animator.SetBool("Sleep", _isSleep);
+        }
+        animator.SetBool("Dead", _dead);
         if (stateInfo.IsName("Melee")|| stateInfo.IsName("Standing To Crouched"))
         {
             agent.velocity = Vector3.zero;
@@ -61,7 +65,11 @@ public class EnemyMelee : EnemyBase
         {
             agent.isStopped = false;
         }
-
+        if (stateInfo.IsName("Dead"))
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+        }
     }
 
 

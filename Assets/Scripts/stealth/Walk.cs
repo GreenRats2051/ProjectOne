@@ -9,7 +9,7 @@ public class Walk : MonoBehaviour
     Collider[] hits;
     void Update()
     {
-        if (gameObject.GetComponent<LisenerActiveButton>().Iscrouch)
+        if (gameObject.GetComponent<LisenerActiveButton>().Iscrouch || gameObject.transform.position.magnitude < 0.2f)
         {
             hits = Physics.OverlapSphere(gameObject.transform.position, 1f);
         }
@@ -20,16 +20,18 @@ public class Walk : MonoBehaviour
 
         foreach(Collider hit in hits)
         {
-            if(hit.gameObject.layer == 9)
+            if(hit.gameObject.layer == 9|| hit.gameObject.layer == 11)
             {
-                if(hit.TryGetComponent<EnemyMelee>(out EnemyMelee enemyMelee))
+                if(hit.TryGetComponent<EnemyBase>(out EnemyBase enemy))
                 {
-                    enemyMelee.IsSleep = false;
+                    enemy.IsSleep = false;
+                    enemy.Player = gameObject;
+                    enemy.IsTrigered = true;
                 }
-                if (hit.TryGetComponent<EnemyRange>(out EnemyRange enemyRange))
-                {
-                    enemyRange.IsSleep = false;
-                }
+                //if (hit.TryGetComponent<EnemyRange>(out EnemyRange enemyRange))
+                //{
+                //    enemyRange.IsSleep = false;
+                //}
             }
         }
     }

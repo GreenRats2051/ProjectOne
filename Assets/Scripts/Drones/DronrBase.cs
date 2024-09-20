@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class DronrBase : MonoBehaviour
 {
     [SerializeField]
-    private int droneLivetime;    
+    private int droneLivetime = 4; 
     [SerializeField]
-    private int droneCoolDownTime;
+    private int droneCoolDownTime = 4; 
     [SerializeField]
     private GameObject prefubDrone;
     [SerializeField]
     private GameObject target;
-    private bool _isActiv;
-    GameObject instDrone;
+    protected GameObject instDrone;
     protected abstract void Interacting();
     private LisenerActiveButton _listener;
-    private bool _isdroneReady;
-
+    private bool _isdroneReady = true;
+    [SerializeField]
+    Slider drone;
     protected virtual void Start()
     {
-        if(TryGetComponent<LisenerActiveButton>(out LisenerActiveButton lisener))
+        drone.maxValue = droneLivetime;
+        drone.value = drone.maxValue;
+        if (TryGetComponent(out LisenerActiveButton lisener))
         {
             _listener = lisener;
+            _listener.OnDroneActivated += Interacting;
             _listener.OnDroneActivated += CreateDrone;
             _listener.OnDroneDeactivated += DestroyDrone;
         }
@@ -32,6 +36,7 @@ public abstract class DronrBase : MonoBehaviour
     {
         if (_listener != null)
         {
+            _listener.OnDroneActivated -= Interacting;
             _listener.OnDroneActivated -= CreateDrone;
             _listener.OnDroneDeactivated -= DestroyDrone;
         }
@@ -39,32 +44,51 @@ public abstract class DronrBase : MonoBehaviour
 
     void CreateDrone()
     {
+
         if (_isdroneReady)
         {
-            instDrone = Instantiate(prefubDrone, target.transform.position + new Vector3(1, 0, 0), target.transform.rotation);
+            drone.maxValue = droneLivetime;
+            drone.value = drone.maxValue;
+            Debug.Log("Creating drone...");
+            instDrone = Instantiate(prefubDrone, target.transform.position + new Vector3(1, 1, 0), target.transform.rotation);
             instDrone.transform.parent = target.transform;
-            DestroyAfterLifetime();
+            StartCoroutine(DestroyAfterLifetime());
         }
 
     }
+
     private void DestroyDrone()
     {
         if (instDrone != null)
         {
+             drone.value = 0;
             Destroy(instDrone);
+            StartCoroutine(Cooldown());
         }
-        StartCoroutine(Cooldown());
     }
 
     private IEnumerator DestroyAfterLifetime()
     {
-        _isdroneReady = false;
-        yield return new WaitForSeconds(droneLivetime);
+        for (int i = 0; i < droneLivetime; i++)
+        {
+            drone.value -= 1;
+            yield return new WaitForSeconds(1);
+        }
         DestroyDrone();
     }
+
     private IEnumerator Cooldown()
     {
-        yield return new WaitForSeconds(droneCoolDownTime);
-        _isdroneReady = true;
+        drone.maxValue = droneCoolDownTime;
+        drone.value = 0;
+        _isdroneReady = false;
+        for(int i =0; i < droneCoolDownTime; i++)
+        {
+            drone.value += 1;
+            yield return new WaitForSeconds(1);
+        }
+
+        
+        _isdroneReady = true; 
     }
 }

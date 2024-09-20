@@ -60,8 +60,10 @@ public class EnemyRange : EnemyBase
 
     protected override void Animate()
     {
-        if (isOnAttackDistance|| _isShooting)
+        animator.SetBool("Dead", _dead);
+        if ((isOnAttackDistance|| _isShooting)&&!_dead)
         {
+            animator.SetBool("Dead", _dead);
             if (Line == null)
             {
                 Line = GetComponent<LineRenderer>();
@@ -69,6 +71,11 @@ public class EnemyRange : EnemyBase
                 Line.endWidth = 0.1f;  
                 Line.positionCount = 2; 
             }
+            if (stateInfo.IsName("Dead"))
+            {
+                animator.SetBool("Dead", false);
+            }
+
             directionToPlayerN = (player.transform.position - transform.position).normalized;
             float distanceToPlayer = Vector3.Distance(bulletStartPoint.transform.position, player.transform.position);
             Quaternion targetRotation = Quaternion.LookRotation(directionToPlayerN); 
@@ -97,6 +104,7 @@ public class EnemyRange : EnemyBase
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         animator.SetBool("IsRunning", agent.velocity.magnitude > 0.1f);
         //animator.SetBool("Attack", isOnAttackDistance);
+        animator.SetBool("Dead", _dead);
         if (stateInfo.IsName("Melee"))
         {
             agent.velocity = Vector3.zero;

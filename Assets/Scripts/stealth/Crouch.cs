@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Crouch 
 {
-    public void InvokeCrouch(GameObject gameObject)
+    public void InvokeCrouch(GameObject gameObject,int value)
     {
-        gameObject.GetComponent<PlayerController>().Speed /= 2;
+        gameObject.GetComponent<PlayerController>().Speed = value;
     }
 }
