@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Enemy
   - Weapon
   layers:
   - Default
@@ -12,18 +13,18 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
   - Enemy
-  - MiniMapPoint
-  - UnHideEnemy
+  - Weapon
   - 
   - 
   - 
-  - Guns
-  - Mask
-  - Black
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
