@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f767e0be2add0844bd000bd63a01965, type: 3}
+  m_Name: TTSettings
+  m_EditorClassIdentifier: 
+  Bullet: {fileID: 5049852072678618470, guid: afb8e343a74ddfb4baabf0d6792a08cb, type: 3}
+  Damage: 1
+  MaxAmmo: 13
+  MaxMagazine: 120
+  TimeNextShoot: 1
+  ShootForce: 20
+  TimeDestroyBullet: 5
+  SpreadX: 0.1
+  SpreadY: 0.1
