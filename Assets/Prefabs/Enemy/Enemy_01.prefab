@@ -284,10 +284,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 2034146651220714211}
   - {fileID: 50382836353677895}
   - {fileID: 5413647317495056077}
   - {fileID: 7684090978539090157}
+=======
+  - {fileID: 7684090978539090157}
+  - {fileID: 2034146651220714211}
+  - {fileID: 50382836353677895}
+  - {fileID: 5413647317495056077}
+>>>>>>> Stashed changes
   m_Father: {fileID: 8638018004065235538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654963855328177038
@@ -544,10 +551,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 6553768995199977907}
   - {fileID: 3424020939457173873}
   - {fileID: 4296257887840864585}
   - {fileID: 1387440101297203169}
+=======
+  - {fileID: 1387440101297203169}
+  - {fileID: 6553768995199977907}
+  - {fileID: 3424020939457173873}
+  - {fileID: 4296257887840864585}
+>>>>>>> Stashed changes
   m_Father: {fileID: 6019629088013362927}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2788510170545602706
@@ -673,7 +687,11 @@ Transform:
   m_GameObject: {fileID: 3106882619671404278}
   serializedVersion: 2
   m_LocalRotation: {x: -0.06148028, y: 0.000009722443, z: -0.0001036883, w: 0.9981083}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -0, y: 0.10096502, z: -0.01248594}
+=======
+  m_LocalPosition: {x: 0, y: 0.10096502, z: -0.01248594}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -923,9 +941,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 3832857281383437110}
   - {fileID: 3018309032563841277}
   - {fileID: 3249566921371684659}
+=======
+  - {fileID: 3249566921371684659}
+  - {fileID: 3832857281383437110}
+  - {fileID: 3018309032563841277}
+>>>>>>> Stashed changes
   m_Father: {fileID: 1341094607851247249}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3561342352026930621
@@ -1394,7 +1418,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+<<<<<<< Updated upstream
   - {fileID: 2100000, guid: b7bd7de4f1fd8ed4a89d05cb58915d43, type: 2}
+=======
+  - {fileID: 2100000, guid: 3d37cda727ccc0c4b99753121c8170e6, type: 2}
+>>>>>>> Stashed changes
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1651,7 +1679,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+<<<<<<< Updated upstream
   - {fileID: 2100000, guid: b7bd7de4f1fd8ed4a89d05cb58915d43, type: 2}
+=======
+  - {fileID: 2100000, guid: 3d37cda727ccc0c4b99753121c8170e6, type: 2}
+>>>>>>> Stashed changes
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1792,8 +1824,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 483962549938274182}
   - {fileID: 6040187070100054010}
+=======
+  - {fileID: 6040187070100054010}
+  - {fileID: 483962549938274182}
+>>>>>>> Stashed changes
   - {fileID: 8400193299239447814}
   m_Father: {fileID: 1890081914604039839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1853,7 +1890,11 @@ Transform:
   m_GameObject: {fileID: 6327403174340401236}
   serializedVersion: 2
   m_LocalRotation: {x: 0.061481845, y: 2.8572878e-14, z: 2.2956474e-13, w: 0.9981082}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -0, y: 0.15260132, z: 0.00000002305891}
+=======
+  m_LocalPosition: {x: 0, y: 0.15260132, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1953,9 +1994,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 2877591799245571788}
   - {fileID: 5134450032180098343}
   - {fileID: 7296701252740249747}
+=======
+  - {fileID: 7296701252740249747}
+  - {fileID: 2877591799245571788}
+  - {fileID: 5134450032180098343}
+>>>>>>> Stashed changes
   m_Father: {fileID: 3973711501596764064}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7456089693188948412

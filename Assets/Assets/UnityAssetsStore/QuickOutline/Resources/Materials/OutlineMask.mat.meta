@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Assets/UnityAssetsStore/QuickOutline/Resources/Materials/OutlineMask.mat.meta
 guid: 106f3ff43a17d4967a2b64c7a92e49ec
 timeCreated: 1520576276
+========
+guid: 311313efa011949e98b6761d652ad13c
+timeCreated: 1520576285
+>>>>>>>> Stashed changes:Assets/Assets/UnityAssetsStore/QuickOutline/Resources/Materials/OutlineFill.mat.meta
 licenseType: Store
 NativeFormatImporter:
   externalObjects: {}

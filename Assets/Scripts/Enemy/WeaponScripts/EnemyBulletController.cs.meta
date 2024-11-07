@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Scripts/Enemy/WeaponScripts/EnemyBulletController.cs.meta
 guid: 33a6563b5a4f74f49a068b6d63d178f1
+========
+guid: 2beae121ff110734faa7fb18852b7cb3
+>>>>>>>> Stashed changes:Assets/Scripts/Enemy/GunSettings/EnemyGunSettings.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

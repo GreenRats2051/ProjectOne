@@ -124,9 +124,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 5168545040423827402}
   - {fileID: 228889822532062319}
   - {fileID: 9030972470030606999}
+=======
+  - {fileID: 9030972470030606999}
+  - {fileID: 5168545040423827402}
+  - {fileID: 228889822532062319}
+>>>>>>> Stashed changes
   - {fileID: 7451383041604636971}
   m_Father: {fileID: 8163333221160246376}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -928,7 +934,11 @@ Transform:
   m_GameObject: {fileID: 3201368101737281100}
   serializedVersion: 2
   m_LocalRotation: {x: 0.061481845, y: 2.8572878e-14, z: 2.2956474e-13, w: 0.9981082}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -0, y: 0.15260132, z: 0.00000002305891}
+=======
+  m_LocalPosition: {x: 0, y: 0.15260132, z: 0}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1152,7 +1162,11 @@ Transform:
   m_GameObject: {fileID: 4361257382160671273}
   serializedVersion: 2
   m_LocalRotation: {x: -0.06148028, y: 0.000009722443, z: -0.0001036883, w: 0.9981083}
+<<<<<<< Updated upstream
   m_LocalPosition: {x: -0, y: 0.10096502, z: -0.01248594}
+=======
+  m_LocalPosition: {x: 0, y: 0.10096502, z: -0.01248594}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1188,10 +1202,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 9215221598116758372}
   - {fileID: 6335182767315283576}
   - {fileID: 1790576318392634122}
   - {fileID: 2150136375906775072}
+=======
+  - {fileID: 2150136375906775072}
+  - {fileID: 9215221598116758372}
+  - {fileID: 6335182767315283576}
+  - {fileID: 1790576318392634122}
+>>>>>>> Stashed changes
   m_Father: {fileID: 6064438124925889141}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4527637356803314928
@@ -1351,10 +1372,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 6514915508962048367}
   - {fileID: 5815799901791361885}
   - {fileID: 3579529002656000117}
   - {fileID: 6986506329627394317}
+=======
+  - {fileID: 6986506329627394317}
+  - {fileID: 6514915508962048367}
+  - {fileID: 5815799901791361885}
+  - {fileID: 3579529002656000117}
+>>>>>>> Stashed changes
   m_Father: {fileID: 4494662633283215707}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5877630637537369707
@@ -1481,8 +1509,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 721472562517872035}
   - {fileID: 2079148420481834420}
+=======
+  - {fileID: 2079148420481834420}
+  - {fileID: 721472562517872035}
+>>>>>>> Stashed changes
   - {fileID: 8758282564030866008}
   m_Father: {fileID: 126835289432355052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1644,9 +1677,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+<<<<<<< Updated upstream
   - {fileID: 2588845156747831044}
   - {fileID: 7764849685406526082}
   - {fileID: 1469912015293517287}
+=======
+  - {fileID: 1469912015293517287}
+  - {fileID: 2588845156747831044}
+  - {fileID: 7764849685406526082}
+>>>>>>> Stashed changes
   m_Father: {fileID: 1389898416270838642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7389488685382531592
@@ -1734,7 +1773,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+<<<<<<< Updated upstream
   - {fileID: 2100000, guid: b7bd7de4f1fd8ed4a89d05cb58915d43, type: 2}
+=======
+  - {fileID: 2100000, guid: 3d37cda727ccc0c4b99753121c8170e6, type: 2}
+>>>>>>> Stashed changes
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1993,7 +2036,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+<<<<<<< Updated upstream
   - {fileID: 2100000, guid: b7bd7de4f1fd8ed4a89d05cb58915d43, type: 2}
+=======
+  - {fileID: 2100000, guid: 3d37cda727ccc0c4b99753121c8170e6, type: 2}
+>>>>>>> Stashed changes
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
