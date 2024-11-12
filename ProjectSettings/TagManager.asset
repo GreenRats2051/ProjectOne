@@ -4,26 +4,30 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Level
   - Weapon
+  - Bullet
+  - Explode
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Level
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
   - Enemy
-  - MiniMapPoint
-  - UnHideEnemy
+  - Consumables
+  - Interactive
   - 
   - 
   - 
-  - Guns
-  - Mask
-  - Black
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
