@@ -4,23 +4,25 @@ public class PlayerInputLisener : MonoBehaviour
 {
     public Vector2 inputAction;
     [SerializeField]
-    private PlayerMovementController playerMovementController;
+    private PlayerMovement playerMovementController;
     [SerializeField]
-    private PlayerMeleeController playerMeleeController;
+    private PlayerMelee playerMeleeController;
     [SerializeField]
-    private PlayerGunController[] playerGunController;
+    private PlayerGun[] playerGunController;
     [SerializeField]
-    private PlayerSelectWeaponController playerSelectWeaponController;
+    private PlayerSelectWeapon playerSelectWeaponController;
     [SerializeField]
-    private PlayerSmokeGrenade playerSmokeGrenade;
+    private PlayerUseSmokeGrenade playerSmokeGrenade;
     [SerializeField]
-    private PlayerUseSkillController playerUseSkillController;
+    private PlayerUseSkill playerUseSkillController;
     [SerializeField]
-    private PauseController pauseController;
+    private Pause pauseController;
     [SerializeField]
     private KeyCode buttonCrouch;
     [SerializeField]
     private KeyCode buttonAttack;
+    [SerializeField]
+    private KeyCode buttonShoot;
     [SerializeField]
     private KeyCode buttonReload;
     [SerializeField]
@@ -45,7 +47,7 @@ public class PlayerInputLisener : MonoBehaviour
         {
             playerMeleeController.Attack();
         }
-        if (Input.GetKey(buttonAttack) && playerGunController.Length != 0 && playerSelectWeaponController.weaponSwitch > 0)
+        if (Input.GetKey(buttonShoot) && playerGunController.Length != 0 && playerSelectWeaponController.weaponSwitch > 0)
         {
             playerGunController[playerSelectWeaponController.weaponSwitch - 1].Shoot(playerMovementController);
         }

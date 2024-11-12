@@ -4,13 +4,9 @@ using UnityEngine.UI;
 public class PlayerStatistics : MonoBehaviour
 {
     [SerializeField]
-    private Slider healthSliderLeftSlider;
+    private Slider healthSlider;
     [SerializeField]
-    private Slider healthSliderRightSlider;
-    [SerializeField]
-    private Slider armorSliderLeftSlider;
-    [SerializeField]
-    private Slider armorSliderRightSlider;
+    private Slider armorSlider;
     [SerializeField]
     private int maxHealth;
     [SerializeField]
@@ -21,8 +17,7 @@ public class PlayerStatistics : MonoBehaviour
         set
         {
             health = value;
-            healthSliderLeftSlider.value = health;
-            healthSliderRightSlider.value = health;
+            healthSlider.value = health;
         }
     }
     [SerializeField]
@@ -35,8 +30,7 @@ public class PlayerStatistics : MonoBehaviour
         set
         {
             armor = value;
-            armorSliderLeftSlider.value = armor;
-            armorSliderRightSlider.value = armor;
+            armorSlider.value = armor;
         }
     }
 
@@ -44,14 +38,10 @@ public class PlayerStatistics : MonoBehaviour
     {
         healthValue = maxHealth;
         armorValue = maxArmor;
-        healthSliderLeftSlider.maxValue = maxHealth;
-        healthSliderRightSlider.maxValue = maxHealth;
-        armorSliderLeftSlider.maxValue = maxArmor;
-        armorSliderRightSlider.maxValue = maxArmor;
-        healthSliderLeftSlider.value = health;
-        healthSliderRightSlider.value = health;
-        armorSliderLeftSlider.value = armor;
-        armorSliderRightSlider.value = armor;
+        healthSlider.maxValue = maxHealth;
+        armorSlider.maxValue = maxArmor;
+        healthSlider.value = healthValue;
+        armorSlider.value = armor;
     }
 
     public void GetHit(int damage)

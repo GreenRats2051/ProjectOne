@@ -4,24 +4,15 @@ using UnityEngine;
 public class PlayerSmokeGrenade : MonoBehaviour
 {
     [SerializeField]
-    private Transform startPoint;
+    private Rigidbody rigidbody;
     [SerializeField]
-    private GameObject prefub;
+    private ParticleSystem particleSystem;
     [SerializeField]
     private float throwHeight;
     [SerializeField]
     private float gravity;
 
-    public void Spawn(Vector3 targetPosition)
-    {
-        GameObject spawnSmoke = Instantiate(prefub, startPoint.position, Quaternion.identity);
-        PlayerSmokeGrenade smokeScript = spawnSmoke.GetComponent<PlayerSmokeGrenade>();
-        Rigidbody rigidbody = spawnSmoke.GetComponentInChildren<Rigidbody>();
-        ParticleSystem particleSystem = spawnSmoke.GetComponent<ParticleSystem>();
-        smokeScript.ThrowToTarget(targetPosition, startPoint.position, rigidbody, particleSystem);
-    }
-
-    void ThrowToTarget(Vector3 targetPosition, Vector3 transformPoint, Rigidbody rigidbody, ParticleSystem particleSystem)
+    public void ThrowToTarget(GameObject spawnSmoke, Vector3 targetPosition, Vector3 transformPoint)
     {
         Vector3 direction = targetPosition - transformPoint;
         Vector3 directionXZ = new Vector3(direction.x, 0, direction.z);
@@ -30,26 +21,26 @@ public class PlayerSmokeGrenade : MonoBehaviour
         float velocityY = gravity * time / 2;
         Vector3 initialVelocity = velocityXZ + Vector3.up * velocityY;
         rigidbody.velocity = initialVelocity;
-        StartCoroutine(ActiveAndDeactive(rigidbody, particleSystem, time));
+        StartCoroutine(ActiveAndDeactive(spawnSmoke, time));
     }
 
-    IEnumerator ActiveAndDeactive(Rigidbody rigidbody, ParticleSystem particleSystem, float time)
+    IEnumerator ActiveAndDeactive(GameObject spawnSmoke, float time)
     {
-        yield return new WaitForSeconds(time);
-        particleSystem.transform.position = rigidbody.position;
-        particleSystem.Play();
+        yield return new WaitForSeconds(time + 0.28f);
+        ParticleSystem smoke = Instantiate(particleSystem, transform.position, Quaternion.identity);
+        smoke.Play();
         yield return new WaitForSeconds(particleSystem.main.duration);
-        Destroy(gameObject);
+        Destroy(spawnSmoke);
+        Destroy(smoke, 20);
     }
 
     void OnParticleCollision(GameObject gameObject)
     {
-
-        if (gameObject.tag == "Enemy")
+        if (gameObject.GetComponent<EnemyStatistics>() != null)
         {
-            gameObject.GetComponent<EnemyMovementController>().Player = null;
+            gameObject.GetComponent<EnemyMovement>().Player = null;
             gameObject.GetComponent<EnemyStatistics>().IsSleep = true;
-            gameObject.GetComponent<EnemyStatistics>().IsTrigered = false;
+            gameObject.GetComponent<EnemyStatistics>().IsTrigered = true;
         }
     }
 }

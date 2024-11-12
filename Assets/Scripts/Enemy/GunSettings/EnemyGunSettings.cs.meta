@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Scripts/Enemy/GunSettings/EnemyGunSettings.cs.meta
-guid: 2beae121ff110734faa7fb18852b7cb3
-========
-guid: c64ec271639f8774ba7f8d7c885e2a66
->>>>>>>> Stashed changes:Assets/Scripts/Enemy/EnemyStatistics.cs.meta
+guid: cd7900155149b0c4d84c76fa19afd551
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

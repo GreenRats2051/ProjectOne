@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Scripts/Enemy/EnemyStatistics.cs.meta
-guid: c64ec271639f8774ba7f8d7c885e2a66
-========
-guid: bde04fefcf99876458869c3853ea96a7
->>>>>>>> Stashed changes:Assets/Scripts/Enemy/EnemyMovementController.cs.meta
+guid: e1235792e3f364e43add569f8555210b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

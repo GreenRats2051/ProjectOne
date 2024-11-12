@@ -3,17 +3,20 @@ using UnityEngine;
 public class ExplosiveBarrel : MonoBehaviour
 {
     [SerializeField]
-    private float explosionRadius; // Радиус взрыва
+    private GameObject explosionEffect;
     [SerializeField]
-    private float explosionForce; // Сила взрыва
+    private int health;
     [SerializeField]
-    private GameObject explosionEffect; // Эффект взрыва
+    private float explosionRadius;
     [SerializeField]
-    private float destroyDelay; // Задержка перед уничтожением бочки
+    private float explosionForce;
+    [SerializeField]
+    private float destroyDelay;
 
-    void OnColliderEnter(Collider Collider)
+    public void GetHit(int damage)
     {
-        if (Collider.tag == "Bullet")
+        health -= damage;
+        if (health <= 0)
         {
             Explode();
         }
@@ -21,17 +24,14 @@ public class ExplosiveBarrel : MonoBehaviour
 
     void Explode()
     {
-        if (explosionEffect != null)
-        {
-            Instantiate(explosionEffect, transform.position, transform.rotation);
-        }
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-        foreach (Collider hit in colliders)
+        foreach (Collider nearbyObject in colliders)
         {
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if (rb != null)
+            Rigidbody rigidbody = nearbyObject.GetComponent<Rigidbody>();
+            if (rigidbody != null)
             {
-                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+                rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
         }
         Destroy(gameObject, destroyDelay);

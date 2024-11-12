@@ -4,19 +4,22 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
+  - Level
   - Weapon
+  - Bullet
+  - Explode
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Level
   - Water
   - UI
   - Player
   - Enemy
-  - Weapon
-  - 
+  - Consumables
+  - Interactive
   - 
   - 
   - 
