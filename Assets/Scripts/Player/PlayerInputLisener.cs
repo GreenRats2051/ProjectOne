@@ -16,8 +16,6 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private PlayerUseSkill playerUseSkillController;
     [SerializeField]
-    private DeveloperMenu developerMenu;
-    [SerializeField]
     private Pause pauseController;
     [SerializeField]
     private KeyCode buttonCrouch;
@@ -32,87 +30,62 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private KeyCode buttonUseSkill;
     [SerializeField]
-    private KeyCode buttonOpenDeveloperMenu;
-    [SerializeField]
     private KeyCode buttonPause;
     private float mouseScroll;
+    private bool _isActive;
 
     void Update()
     {
         inputAction.x = Input.GetAxis("Horizontal");
         inputAction.y = Input.GetAxis("Vertical");
         mouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        if (playerMovementController != null)
-        {
-            playerMovementController.Walk(inputAction);
-            playerMovementController.Crouch(Input.GetKey(buttonCrouch));
-        }
-        if (Input.GetKeyDown(buttonAttack) && playerMeleeController != null)
-        {
-            playerMeleeController.Attack();
-        }
-        if (Input.GetKey(buttonShoot) && playerGunController.Length != 0 && playerSelectWeaponController.weaponSwitch > 0)
-        {
-            playerGunController[playerSelectWeaponController.weaponSwitch - 1].Shoot(playerMovementController);
-        }
-        if (Input.GetKey(buttonReload) && playerGunController.Length != 0)
-        {
-            playerGunController[playerSelectWeaponController.weaponSwitch - 1].Reload();
-        }
-        if (playerSelectWeaponController != null)
-        {
-            playerSelectWeaponController.SelectWeapon(mouseScroll);
-        }
-        if (Input.GetKeyDown(buttonGrenade) && playerSmokeGrenade != null)
-        {
-            playerSmokeGrenade.Spawn(playerMovementController.MousePoint.position);
-        }
-        if (Input.GetKeyDown(buttonUseSkill) && playerUseSkillController != null)
-        {
-            playerUseSkillController.UseSkill();
-        }
-        if (Input.GetKeyDown(buttonOpenDeveloperMenu) && developerMenu != null)
-        {
-            developerMenu.OpenDeveloperMenu();
-        }
         if (Input.GetKeyDown(buttonPause) && pauseController != null)
         {
             pauseController.OpenPause();
+        }
+        if (_isActive)
+        {
+            if (playerMovementController != null)
+            {
+                playerMovementController.Walk(inputAction);
+                playerMovementController.Crouch(Input.GetKey(buttonCrouch));
+            }
+            if (Input.GetKeyDown(buttonAttack) && playerMeleeController != null)
+            {
+                playerMeleeController.Attack();
+            }
+            if (Input.GetKey(buttonShoot) && playerGunController.Length != 0 && playerSelectWeaponController.weaponSwitch > 0)
+            {
+                playerGunController[playerSelectWeaponController.weaponSwitch - 1].Shoot(playerMovementController);
+            }
+            if (Input.GetKey(buttonReload) && playerGunController.Length != 0)
+            {
+                playerGunController[playerSelectWeaponController.weaponSwitch - 1].Reload();
+            }
+            if (playerSelectWeaponController != null)
+            {
+                playerSelectWeaponController.SelectWeapon(mouseScroll);
+            }
+            if (Input.GetKeyDown(buttonGrenade) && playerSmokeGrenade != null)
+            {
+                playerSmokeGrenade.Spawn(playerMovementController.MousePoint.position);
+            }
+            if (Input.GetKeyDown(buttonUseSkill) && playerUseSkillController != null)
+            {
+                playerUseSkillController.UseSkill();
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(buttonPause) && pauseController != null)
+            {
+                pauseController.OpenPause();
+            }
         }
     }
 
     public void ActivateScripts(bool isActive)
     {
-        if (playerMovementController != null)
-        {
-            playerMovementController.enabled = isActive;
-        }
-        if (playerMeleeController != null)
-        {
-            playerMeleeController.enabled = isActive;
-        }
-        if (playerGunController.Length != 0)
-        {
-            for (int i = 0; i < playerGunController.Length; i++)
-            {
-                playerGunController[i].enabled = isActive;
-            }
-        }
-        if (playerSelectWeaponController != null)
-        {
-            playerSelectWeaponController.enabled = isActive;
-        }
-        if (playerSmokeGrenade != null)
-        {
-            playerSmokeGrenade.enabled = isActive;
-        }
-        if (playerUseSkillController != null)
-        {
-            playerUseSkillController.enabled = isActive;
-        }
-        if (developerMenu != null)
-        {
-            developerMenu.enabled = isActive;
-        }
+        _isActive = isActive;
     }
 }
