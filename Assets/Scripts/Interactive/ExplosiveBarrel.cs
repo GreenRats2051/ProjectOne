@@ -29,9 +29,19 @@ public class ExplosiveBarrel : MonoBehaviour
         foreach (Collider nearbyObject in colliders)
         {
             Rigidbody rigidbody = nearbyObject.GetComponent<Rigidbody>();
+            EnemyStatistics enemyStatistics = nearbyObject.GetComponent<EnemyStatistics>();
+            PlayerStatistics playerStatistics = nearbyObject.GetComponent<PlayerStatistics>();
             if (rigidbody != null)
             {
                 rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            }
+            if (enemyStatistics != null)
+            {
+                enemyStatistics.GetHit(999);
+            }
+            if (playerStatistics != null)
+            {
+                playerStatistics.GetHit(5);
             }
         }
         Destroy(gameObject, destroyDelay);

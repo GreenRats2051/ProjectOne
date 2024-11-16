@@ -10,25 +10,34 @@ public class Dialogue : MonoBehaviour
     private TMP_Text text;
     [SerializeField]
     private DialogueSettings[] dialogueSettings;
+
     private int indexDialogue
     {
         get => indexDialogueValue;
         set
         {
             indexDialogueValue = value;
-            text.text = dialogueSettings[indexDialogueValue].textDialogue;
+            text.text = $"<color=#{ColorUtility.ToHtmlStringRGB(dialogueSettings[indexDialogueValue].color)}>" + dialogueSettings[indexDialogueValue].nameCharacter + ": " + $"</color>" + dialogueSettings[indexDialogueValue].textCharacterDialogue;
         }
     }
     private int indexDialogueValue;
     private float timeDialogue;
 
-    void OnTriggerStay(Collider collider)
+    void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
         {
             textObject.SetActive(true);
+            text.text = $"<color=#{ColorUtility.ToHtmlStringRGB(dialogueSettings[indexDialogueValue].color)}>" + dialogueSettings[indexDialogueValue].nameCharacter + ": " + $"</color>" + dialogueSettings[indexDialogueValue].textCharacterDialogue;
+        }
+    }
+
+    void OnTriggerStay(Collider collider)
+    {
+        if (collider.tag == "Player")
+        {
             timeDialogue += Time.deltaTime;
-            if (timeDialogue >= dialogueSettings[indexDialogue].timeNextDialogue)
+            if (timeDialogue >= dialogueSettings[indexDialogue].timeNextDialogue && indexDialogue <= dialogueSettings.Length)
             {
                 indexDialogue++;
             }
@@ -45,6 +54,8 @@ public class Dialogue : MonoBehaviour
 [Serializable]
 public class DialogueSettings
 {
-    public string textDialogue;
+    public Color color;
+    public string nameCharacter;
+    public string textCharacterDialogue;
     public float timeNextDialogue;
 }

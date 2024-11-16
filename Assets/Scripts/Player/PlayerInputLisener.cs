@@ -16,6 +16,8 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private PlayerUseSkill playerUseSkillController;
     [SerializeField]
+    private DeveloperMenu developerMenu;
+    [SerializeField]
     private Pause pauseController;
     [SerializeField]
     private KeyCode buttonCrouch;
@@ -29,6 +31,8 @@ public class PlayerInputLisener : MonoBehaviour
     private KeyCode buttonGrenade;
     [SerializeField]
     private KeyCode buttonUseSkill;
+    [SerializeField]
+    private KeyCode buttonOpenDeveloperMenu;
     [SerializeField]
     private KeyCode buttonPause;
     private float mouseScroll;
@@ -67,9 +71,48 @@ public class PlayerInputLisener : MonoBehaviour
         {
             playerUseSkillController.UseSkill();
         }
+        if (Input.GetKeyDown(buttonOpenDeveloperMenu) && developerMenu != null)
+        {
+            developerMenu.OpenDeveloperMenu();
+        }
         if (Input.GetKeyDown(buttonPause) && pauseController != null)
         {
             pauseController.OpenPause();
+        }
+    }
+
+    public void ActivateScripts(bool isActive)
+    {
+        if (playerMovementController != null)
+        {
+            playerMovementController.enabled = isActive;
+        }
+        if (playerMeleeController != null)
+        {
+            playerMeleeController.enabled = isActive;
+        }
+        if (playerGunController.Length != 0)
+        {
+            for (int i = 0; i < playerGunController.Length; i++)
+            {
+                playerGunController[i].enabled = isActive;
+            }
+        }
+        if (playerSelectWeaponController != null)
+        {
+            playerSelectWeaponController.enabled = isActive;
+        }
+        if (playerSmokeGrenade != null)
+        {
+            playerSmokeGrenade.enabled = isActive;
+        }
+        if (playerUseSkillController != null)
+        {
+            playerUseSkillController.enabled = isActive;
+        }
+        if (developerMenu != null)
+        {
+            developerMenu.enabled = isActive;
         }
     }
 }

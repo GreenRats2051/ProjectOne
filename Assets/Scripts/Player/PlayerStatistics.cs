@@ -54,7 +54,7 @@ public class PlayerStatistics : MonoBehaviour
         {
             healthValue -= damage;
         }
-        else if (healthValue <= 0)
+        else if (healthValue < 1)
         {
             Destroy(gameObject);
         }

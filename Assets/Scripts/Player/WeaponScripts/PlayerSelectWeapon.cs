@@ -15,11 +15,11 @@ public class PlayerSelectWeapon : MonoBehaviour
         set
         {
             currentWeapon = value;
-            if (playerGun[currentWeapon].GunController == null)
+            if (playerGun[currentWeapon].GunController == null || playerGun[currentWeapon].IsHavePlayer == false)
             {
                 Ammo.text = "None";
             }
-            else
+            else if (playerGun[currentWeapon].GunController != null && playerGun[currentWeapon].IsHavePlayer == true)
             {
                 Ammo.text = playerGun[currentWeapon].GunController.Ammo + "/" + playerGun[currentWeapon].GunController.Magazine;
             }

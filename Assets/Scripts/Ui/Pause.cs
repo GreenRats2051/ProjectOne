@@ -11,7 +11,7 @@ public class Pause : MonoBehaviour
     private GameObject achievementMenuObject;
     [SerializeField]
     private PlayerInputLisener playerInputLisener;
-    private bool pauseOpen;
+    private bool isOpen;
 
     void Start()
     {
@@ -21,32 +21,33 @@ public class Pause : MonoBehaviour
 
     public void OpenPause()
     {
-        pauseOpen = !pauseOpen;
-        if (pauseOpen)
+        isOpen = !isOpen;
+        if (isOpen)
         {
+            playerInputLisener.ActivateScripts(false);
             pauseMenuObject.SetActive(true);
-            settingsMenuObject.SetActive(false);
-            achievementMenuObject.SetActive(false);
-            playerInputLisener.enabled = false;
+            Cursor.visible = true;
             Time.timeScale = 0;
         }
         else
         {
+            playerInputLisener.ActivateScripts(true);
             pauseMenuObject.SetActive(false);
-            settingsMenuObject.SetActive(false);
-            achievementMenuObject.SetActive(false);
-            playerInputLisener.enabled = true;
+            Cursor.visible = false;
             Time.timeScale = 1;
         }
+        settingsMenuObject.SetActive(false);
+        achievementMenuObject.SetActive(false);
     }
 
     public void Return()
     {
-        pauseOpen = false;
+        isOpen = false;
         pauseMenuObject.SetActive(false);
         settingsMenuObject.SetActive(false);
         achievementMenuObject.SetActive(false);
-        playerInputLisener.enabled = true;
+        playerInputLisener.ActivateScripts(true);
+        Cursor.visible = false;
         Time.timeScale = 1;
     }
 
@@ -55,8 +56,8 @@ public class Pause : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void Quit()
+    public void QuitInMainMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }
