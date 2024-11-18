@@ -16,6 +16,8 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private PlayerUseSkill playerUseSkillController;
     [SerializeField]
+    private DeveloperMenu developerMenu;
+    [SerializeField]
     private Pause pauseController;
     [SerializeField]
     private KeyCode buttonCrouch;
@@ -30,20 +32,18 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private KeyCode buttonUseSkill;
     [SerializeField]
+    private KeyCode buttonOpenDeveloperMenu;
+    [SerializeField]
     private KeyCode buttonPause;
     private float mouseScroll;
-    private bool _isActive;
+    private bool pauseActive;
 
     void Update()
     {
         inputAction.x = Input.GetAxis("Horizontal");
         inputAction.y = Input.GetAxis("Vertical");
         mouseScroll = Input.GetAxis("Mouse ScrollWheel");
-        if (Input.GetKeyDown(buttonPause) && pauseController != null)
-        {
-            pauseController.OpenPause();
-        }
-        if (_isActive)
+        if (!pauseActive)
         {
             if (playerMovementController != null)
             {
@@ -75,17 +75,18 @@ public class PlayerInputLisener : MonoBehaviour
                 playerUseSkillController.UseSkill();
             }
         }
-        else
+        if (Input.GetKeyDown(buttonOpenDeveloperMenu) && developerMenu != null)
         {
-            if (Input.GetKeyDown(buttonPause) && pauseController != null)
-            {
-                pauseController.OpenPause();
-            }
+            developerMenu.OpenDeveloperMenu();
+        }
+        if (Input.GetKeyDown(buttonPause) && pauseController != null)
+        {
+            pauseController.OpenPause();
         }
     }
 
     public void ActivateScripts(bool isActive)
     {
-        _isActive = isActive;
+        pauseActive = isActive;
     }
 }

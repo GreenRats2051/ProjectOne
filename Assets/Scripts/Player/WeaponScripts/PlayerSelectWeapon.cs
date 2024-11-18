@@ -1,11 +1,14 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSelectWeapon : MonoBehaviour
 {
     [SerializeField]
     private TMP_Text Ammo;
+    [SerializeField]
+    private Image currentIconWeapon;
     [SerializeField]
     private Gun[] playerGun;
     public int weaponSwitch;
@@ -17,10 +20,14 @@ public class PlayerSelectWeapon : MonoBehaviour
             currentWeapon = value;
             if (playerGun[currentWeapon].GunController == null || playerGun[currentWeapon].IsHavePlayer == false)
             {
+                currentIconWeapon.sprite = null;
+                currentIconWeapon.color = new Color(255, 255, 255, 0);
                 Ammo.text = "None";
             }
             else if (playerGun[currentWeapon].GunController != null && playerGun[currentWeapon].IsHavePlayer == true)
             {
+                currentIconWeapon.sprite = playerGun[currentWeapon].iconWeapon;
+                currentIconWeapon.color = new Color(255, 255, 255, 255);
                 Ammo.text = playerGun[currentWeapon].GunController.Ammo + "/" + playerGun[currentWeapon].GunController.Magazine;
             }
         }
@@ -73,6 +80,7 @@ public class PlayerSelectWeapon : MonoBehaviour
 public class Gun
 {
     public GameObject Weapon;
+    public Sprite iconWeapon;
     public PlayerGun GunController;
     public bool IsHavePlayer;
 }
