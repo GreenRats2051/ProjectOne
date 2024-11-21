@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform MousePoint;
     [SerializeField]
     private LayerMask layerMask;
+    private Collider[] hits;
     [SerializeField]
     private Rigidbody rigidbody;
     private float speed;
@@ -15,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private float speedWalk;
     [SerializeField]
     private float speedCrouch;
+    [SerializeField]
+    private float walkSoundRadius;
 
     public void Walk(Vector2 InputAction)
     {
@@ -26,6 +29,22 @@ public class PlayerMovement : MonoBehaviour
             MousePoint.position = RaycastHit.point;
         }
         playerModel.LookAt(new Vector3(MousePoint.position.x, transform.position.y, MousePoint.position.z));
+        if (InputAction != null)
+        {
+            hits = Physics.OverlapSphere(gameObject.transform.position, speed);
+            foreach (Collider hit in hits)
+            {
+                if (hit.gameObject.tag == "Enemy")
+                {
+                    if (hit.TryGetComponent<EnemyStatistics>(out EnemyStatistics enemyStatistics) || hit.TryGetComponent<EnemyMovement>(out EnemyMovement enemyMovement))
+                    {
+                        //enemyMovement.Player = gameObject;
+                        enemyStatistics.IsSleep = false;
+                        enemyStatistics.IsTrigered = true;
+                    }
+                }
+            }
+        }
     }
 
     public void Crouch(bool isCrouch)
