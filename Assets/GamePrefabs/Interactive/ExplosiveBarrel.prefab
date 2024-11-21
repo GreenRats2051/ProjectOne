@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1452251057191698244}
   - component: {fileID: 2506160558959529304}
   - component: {fileID: -5989051322868763622}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ExplosiveBarrel
-  m_TagString: Untagged
+  m_TagString: Explode
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 4030188263124752562, guid: 560ae7d01ac09254cba78bb4f2154500,
     type: 3}
-  health: 5
+  health: 2
   explosionRadius: 4
   explosionForce: 600
   destroyDelay: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2006436537958178568}
   - component: {fileID: 6669821896288778083}
   - component: {fileID: 8264327499235049362}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

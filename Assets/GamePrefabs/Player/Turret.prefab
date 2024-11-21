@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5789863245185602270}
   - component: {fileID: 3071790458569562434}
   - component: {fileID: 4499855748192887236}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_04_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5770243953184725706}
   - component: {fileID: 3089442131570303159}
   - component: {fileID: 8505584868145648094}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_04_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 326416695645811060}
   - component: {fileID: 4566712462379848583}
   - component: {fileID: 5074566757130911804}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_03_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 992106287867319081}
   - component: {fileID: 2423446292308472162}
   - component: {fileID: 3566796759175567836}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_02_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 1974810562457673874}
   - component: {fileID: 7479389013560257696}
   - component: {fileID: 1011599383197328164}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_03_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   - component: {fileID: 8320980002396205333}
   - component: {fileID: 2446026552089477837}
   - component: {fileID: 2870858658525345675}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_01_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 7222972656159208372}
   - component: {fileID: 290440104477928796}
   - component: {fileID: 8819705285925390545}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_01_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 6710404464577176522}
   - component: {fileID: 968608168817742959}
   - component: {fileID: 4087588309534276615}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_01_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 5809075295073220539}
   - component: {fileID: 3421094965927269205}
   - component: {fileID: 6162025290481924030}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -735,7 +735,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3861365937020756394}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 15
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -768,6 +768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startShoot: {fileID: 6451945319463540421}
   upperPart: {fileID: 6477748173264280764}
+  enemy: {fileID: 0}
   bullet: {fileID: 8075986884627631313, guid: 2c4990d65a43dc54884cf77c43a8aa63, type: 3}
   stateMachine: 0
   lineRenderer: {fileID: 2158732791119537394}
@@ -789,7 +790,7 @@ GameObject:
   - component: {fileID: 7990842571991879862}
   - component: {fileID: 6033472518907194634}
   - component: {fileID: 5498361281576014827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_01_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -871,7 +872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6909200113813710242}
   - component: {fileID: 2158732791119537394}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StartLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1008,7 +1009,7 @@ GameObject:
   - component: {fileID: 1702719054931798654}
   - component: {fileID: 4778768885382878154}
   - component: {fileID: 7601229886638294340}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_04_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1089,7 +1090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6451945319463540421}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StartShoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1120,7 +1121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 50089468612213684}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1155,7 +1156,7 @@ GameObject:
   - component: {fileID: 3973828415477687195}
   - component: {fileID: 5738708283316995135}
   - component: {fileID: 4751458192658074579}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_03_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1238,7 +1239,7 @@ GameObject:
   - component: {fileID: 6477748173264280764}
   - component: {fileID: 8779694705795584174}
   - component: {fileID: 1940805517414346760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Turret_02_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

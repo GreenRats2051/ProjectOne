@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5279868224064859852}
   - component: {fileID: 5944060913189741719}
   - component: {fileID: 8471433525466873298}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Screw_01_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3890508548809104256}
   - component: {fileID: 3734063823219146378}
   - component: {fileID: 1225955587952499619}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Drone_01_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 4640264505426598342}
   - component: {fileID: 6559218978354231957}
   - component: {fileID: 1554304741378311048}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Screw_01_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 4703653147876181860}
   - component: {fileID: 7403370082744845090}
   - component: {fileID: 7398315453025486562}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MedicalDrone
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 1607398982683577890}
   - component: {fileID: 4079191782919804739}
   - component: {fileID: 1781872665684683919}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Screw_01_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -418,7 +418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5915954436067780644}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 6923443976598508374}
   - component: {fileID: 2206221027166887155}
   - component: {fileID: 8689960716808893169}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Drone_01_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 7177579264791865372}
   - component: {fileID: 8591975433591478939}
   - component: {fileID: 1861055550347239957}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Screw_01_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}

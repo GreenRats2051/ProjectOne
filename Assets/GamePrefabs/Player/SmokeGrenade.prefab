@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6261813810737048007}
   - component: {fileID: 3662844372041469875}
   - component: {fileID: 6512833553600885446}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grenade_01_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 9106473130653236615}
   - component: {fileID: 6367748132331071727}
   - component: {fileID: 4455178329781616302}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grenade_01_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 930706152205037196}
   - component: {fileID: 7237224986301053876}
   - component: {fileID: 900299284591430048}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SmokeGrenade
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3340620480364595586}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SmokeGrenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

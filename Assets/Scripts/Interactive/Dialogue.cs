@@ -37,7 +37,7 @@ public class Dialogue : MonoBehaviour
         if (collider.tag == "Player")
         {
             timeDialogue += Time.deltaTime;
-            if (timeDialogue >= dialogueSettings[indexDialogue].timeNextDialogue && indexDialogue <= dialogueSettings.Length)
+            if (timeDialogue >= dialogueSettings[indexDialogue].timeNextDialogue && indexDialogue >= dialogueSettings.Length)
             {
                 indexDialogue++;
             }
