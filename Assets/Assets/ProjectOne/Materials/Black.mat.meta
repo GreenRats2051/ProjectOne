@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/Assets/ProjectOne/Materials/Black.mat.meta
 guid: 86e90e1d3ae81cf46ab3f37296326f79
+=======
+guid: b1c80c4eb8d9f614da1a35fcb1de44fa
+>>>>>>> Stashed changes:Assets/Assets/GamePrefab/Materials/MousePoint.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
