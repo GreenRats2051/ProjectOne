@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream:Assets/Assets/ProjectOne/Materials/Grey.mat.meta
 guid: f8fbdd8baab49b24181d5c038e854b8b
-=======
-guid: 31adf02b5e5feaf41b77636a69d2fc4f
->>>>>>> Stashed changes:Assets/Assets/GamePrefab/Materials/PlayerSkin.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

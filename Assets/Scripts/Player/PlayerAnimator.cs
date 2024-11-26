@@ -13,9 +13,9 @@ public class PlayerAnimator : MonoBehaviour
 
     void Update()
     {
-        animator.SetFloat("WalkX", playerInputLisener.inputAction.x);
-        animator.SetFloat("WalkY", playerInputLisener.inputAction.y);
-        animator.SetFloat("PlayerRotate", playerMovementController.playerModel.rotation.eulerAngles.y);
-        animator.SetFloat("CurrentWeapon", playerSelectWeaponController.weaponSwitch);
+        animator.SetFloat("MoveX", playerInputLisener.inputAction.x);
+        animator.SetFloat("MoveY", playerInputLisener.inputAction.y);
+        animator.SetFloat("PlayerAngle", playerMovementController.playerModel.rotation.eulerAngles.y);
+        animator.SetInteger("IndexWeapon", playerSelectWeaponController.weaponSwitch);
     }
 }

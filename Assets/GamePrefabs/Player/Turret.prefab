@@ -735,7 +735,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3861365937020756394}
   serializedVersion: 4
-  m_Mass: 15
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -768,7 +768,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startShoot: {fileID: 6451945319463540421}
   upperPart: {fileID: 6477748173264280764}
-  enemy: {fileID: 0}
   bullet: {fileID: 8075986884627631313, guid: 2c4990d65a43dc54884cf77c43a8aa63, type: 3}
   stateMachine: 0
   lineRenderer: {fileID: 2158732791119537394}

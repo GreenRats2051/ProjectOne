@@ -10,17 +10,8 @@ public class Dialogue : MonoBehaviour
     private TMP_Text text;
     [SerializeField]
     private DialogueSettings[] dialogueSettings;
-
-    private int indexDialogue
-    {
-        get => indexDialogueValue;
-        set
-        {
-            indexDialogueValue = value;
-            text.text = $"<color=#{ColorUtility.ToHtmlStringRGB(dialogueSettings[indexDialogueValue].color)}>" + dialogueSettings[indexDialogueValue].nameCharacter + ": " + $"</color>" + dialogueSettings[indexDialogueValue].textCharacterDialogue;
-        }
-    }
-    private int indexDialogueValue;
+    private int indexDialogue;
+    [SerializeField]
     private float timeDialogue;
 
     void OnTriggerEnter(Collider collider)
@@ -28,7 +19,7 @@ public class Dialogue : MonoBehaviour
         if (collider.tag == "Player")
         {
             textObject.SetActive(true);
-            text.text = $"<color=#{ColorUtility.ToHtmlStringRGB(dialogueSettings[indexDialogueValue].color)}>" + dialogueSettings[indexDialogueValue].nameCharacter + ": " + $"</color>" + dialogueSettings[indexDialogueValue].textCharacterDialogue;
+            text.text = $"<color=#{ColorUtility.ToHtmlStringRGB(dialogueSettings[indexDialogue].color)}>" + dialogueSettings[indexDialogue].nameCharacter + ": " + $"</color>" + dialogueSettings[indexDialogue].textCharacterDialogue;
         }
     }
 
@@ -36,10 +27,15 @@ public class Dialogue : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
-            timeDialogue += Time.deltaTime;
-            if (timeDialogue >= dialogueSettings[indexDialogue].timeNextDialogue && indexDialogue >= dialogueSettings.Length)
+            Debug.Log(indexDialogue);
+            if (indexDialogue < dialogueSettings.Length - 1)
             {
-                indexDialogue++;
+                timeDialogue += Time.deltaTime;
+                if (timeDialogue >= dialogueSettings[indexDialogue].timeNextDialogue)
+                {
+                    indexDialogue++;
+                    timeDialogue = 0;
+                }
             }
         }
     }

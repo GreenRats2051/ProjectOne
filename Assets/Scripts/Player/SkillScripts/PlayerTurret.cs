@@ -6,7 +6,6 @@ public class PlayerTurret : MonoBehaviour
     private Transform startShoot;
     [SerializeField]
     private Transform upperPart;
-    [SerializeField]
     private Transform enemy;
     [SerializeField]
     private GameObject bullet;
