@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Explode
   - Enemy
+  - Level
   layers:
   - Default
   - TransparentFX
@@ -13,9 +14,9 @@ TagManager:
   - Ignore Raycast Mouse
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Mask
+  - Enemy
+  - Player
   - 
   - 
   - 
