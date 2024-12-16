@@ -9,8 +9,7 @@ public class PlayerSelectWeapon : MonoBehaviour
     private TMP_Text Ammo;
     [SerializeField]
     private Image currentIconWeapon;
-    [SerializeField]
-    private Gun[] playerGun;
+    public Gun[] playerGun;
     public int weaponSwitch;
     private int currentWeaponValue
     {
