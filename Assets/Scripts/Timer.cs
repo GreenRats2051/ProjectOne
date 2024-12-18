@@ -6,7 +6,7 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
-    public GameObject cubePrefab;
+    public GameObject[] enemyPrefab;
     public Transform[] spawnPoints;
 
     private float timer = 120f; // Время в секундах
@@ -37,6 +37,7 @@ public class Timer : MonoBehaviour
     void SpawnEnemy()
     {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-        Instantiate(cubePrefab, spawnPoints[spawnPointIndex].position, Quaternion.identity);
+        int enemyIndex = Random.Range(0, spawnPoints.Length);
+        //Instantiate(enemyPrefab[enemyIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
     }
 }
