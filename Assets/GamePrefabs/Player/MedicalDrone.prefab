@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48bf51f49c3946540b6797d486d4c205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   navMeshAgent: {fileID: 7403370082744845090}
   followDistance: 0.4
   speedFly: 2
@@ -99,7 +100,7 @@ PrefabInstance:
     - target: {fileID: 848142042214588286, guid: 816097b509285d24bb70fb4261c58187,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 848142042214588286, guid: 816097b509285d24bb70fb4261c58187,
         type: 3}
@@ -109,12 +110,12 @@ PrefabInstance:
     - target: {fileID: 848142042214588286, guid: 816097b509285d24bb70fb4261c58187,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 848142042214588286, guid: 816097b509285d24bb70fb4261c58187,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 848142042214588286, guid: 816097b509285d24bb70fb4261c58187,
         type: 3}
@@ -124,7 +125,7 @@ PrefabInstance:
     - target: {fileID: 848142042214588286, guid: 816097b509285d24bb70fb4261c58187,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -270
       objectReference: {fileID: 0}
     - target: {fileID: 848142042214588286, guid: 816097b509285d24bb70fb4261c58187,
         type: 3}

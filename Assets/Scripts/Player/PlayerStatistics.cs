@@ -67,4 +67,12 @@ public class PlayerStatistics : MonoBehaviour
             healthValue += plusHealth;
         }
     }
+
+    public void Armoring()
+    {
+        if (armorValue > 0)
+        {
+            armorValue++;
+        }
+    }
 }

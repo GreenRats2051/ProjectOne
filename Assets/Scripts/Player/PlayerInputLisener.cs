@@ -16,8 +16,6 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private PlayerUseSkill playerUseSkillController;
     [SerializeField]
-    private DeveloperMenu developerMenu;
-    [SerializeField]
     private Pause pauseController;
     [SerializeField]
     private KeyCode buttonCrouch;
@@ -74,10 +72,6 @@ public class PlayerInputLisener : MonoBehaviour
             {
                 playerUseSkillController.UseSkill();
             }
-        }
-        if (Input.GetKeyDown(buttonOpenDeveloperMenu) && developerMenu != null)
-        {
-            developerMenu.OpenDeveloperMenu();
         }
         if (Input.GetKeyDown(buttonPause) && pauseController != null)
         {
