@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public abstract class DronrBase : MonoBehaviour
 {
@@ -14,37 +15,30 @@ public abstract class DronrBase : MonoBehaviour
     [SerializeField]
     private GameObject target;
     protected GameObject instDrone;
-    protected abstract void Interacting();
-    private PlayerInputLisener _listener;
+
     private bool _isdroneReady = true;
     [SerializeField]
     private Slider drone;
+    [SerializeField]
     private bool droneTrack = true;
 
     protected virtual void Start()
     {
         drone.maxValue = droneLivetime;
         drone.value = drone.maxValue;
-        //if (TryGetComponent(out PlayerInputLisener lisener))
-        //{
-        //    _listener = lisener;
-        //    _listener.OnDroneActivated += Interacting;
-        //    _listener.OnDroneActivated += CreateDrone;
-        //    _listener.OnDroneDeactivated += DestroyDrone;
-        //}
+        
     }
 
-    protected virtual void OnDestroy()
+    protected virtual void ActionDrone(){}
+    internal virtual void ActionDrone(float valueF1,float valueF2, bool boolValue1 )
     {
-        //if (_listener != null)
-        //{
-        //    _listener.OnDroneActivated -= Interacting;
-        //    _listener.OnDroneActivated -= CreateDrone;
-        //    _listener.OnDroneDeactivated -= DestroyDrone;
-        //}
+        gameObject.transform.position += new Vector3(valueF1, 0, valueF2) * Time.deltaTime;
     }
-
-    void CreateDrone()
+    public bool IsDroneAllive()
+    {
+        return instDrone != null;
+    }
+    public void CreateDrone()
     {
 
         if (_isdroneReady)
@@ -61,15 +55,7 @@ public abstract class DronrBase : MonoBehaviour
 
     }
 
-    private void DestroyDrone()
-    {
-        if (instDrone != null)
-        {
-             drone.value = 0;
-            Destroy(instDrone);
-            StartCoroutine(Cooldown());
-        }
-    }
+
 
     private IEnumerator DestroyAfterLifetime()
     {
@@ -80,7 +66,15 @@ public abstract class DronrBase : MonoBehaviour
         }
         DestroyDrone();
     }
-
+    private void DestroyDrone()
+    {
+        if (instDrone != null)
+        {
+            drone.value = 0;
+            Destroy(instDrone);
+            StartCoroutine(Cooldown());
+        }
+    }
     private IEnumerator Cooldown()
     {
         drone.maxValue = droneCoolDownTime;
@@ -91,8 +85,6 @@ public abstract class DronrBase : MonoBehaviour
             drone.value += 1;
             yield return new WaitForSeconds(1);
         }
-
-        
         _isdroneReady = true; 
     }
 }

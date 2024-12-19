@@ -5,44 +5,50 @@ using UnityEngine;
 
 public class DroneDestroyer : DronrBase
 {
-    [SerializeField] private int power = 55;
-    ////[SerializeField] private PlayerController PlayerController;
+    [SerializeField]
+    private GameObject explosionEffect;
+    [SerializeField]
+    private float explosionRadius;
+    [SerializeField]
+    private float explosionForce;
+    [SerializeField]
+    private float destroyDelay;
 
-    ////protected override void OnDestroy()
-    ////{
-    ////    PlayerController.SwitchToDrone();
-    ////}
-    //public void SpawnSetings(Player player)
-    //{
-    //    PlayerController = player;
-    //    player.SwitchToDrone();
-    //}
     private void Update()
     {
-        Interacting();
+        ActionDrone();
     }
-  
-    private void Expore()
+
+    void Explode()
     {
-        Collider[] hits = Physics.OverlapSphere(gameObject.transform.position, 3);
-        for (int i = 0; i < hits.Length; i++)
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider nearbyObject in colliders)
         {
-            if (hits[i].gameObject.TryGetComponent(out Player player))
+            Rigidbody rigidbody = nearbyObject.GetComponent<Rigidbody>();
+            EnemyStatistics enemyStatistics = nearbyObject.GetComponent<EnemyStatistics>();
+            PlayerStatistics playerStatistics = nearbyObject.GetComponent<PlayerStatistics>();
+            if (rigidbody != null)
             {
-                player.GetHit(power);
+                rigidbody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
-            if (hits[i].gameObject.TryGetComponent(out EnemyBase enemy))
+            if (enemyStatistics != null)
             {
-                enemy.GetHit(power);
+                enemyStatistics.GetHit(999);
+            }
+            if (playerStatistics != null)
+            {
+                playerStatistics.GetHit(5);
             }
         }
+        Destroy(gameObject, destroyDelay);
     }
-    protected override void Interacting()
+    internal override void ActionDrone(float valueH, float valueV,bool boolValue)
     {
-        gameObject.transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Tab))
+        base.ActionDrone(valueH, valueV,boolValue);
+        if (boolValue)
         {
-            Expore();
+            Explode();
             Destroy(gameObject);
         }
     }

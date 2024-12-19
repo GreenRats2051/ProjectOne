@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public abstract class SupportBase : MonoBehaviour
@@ -7,8 +8,8 @@ public abstract class SupportBase : MonoBehaviour
     [SerializeField]
     private Transform _anchorPoint;
 
-    [SerializeField]
-    private Transform _anchorPointDefault;
+    //[SerializeField]
+    //private Transform _anchorPointDefault;
 
     [SerializeField]
     private Player _player;
@@ -22,17 +23,21 @@ public abstract class SupportBase : MonoBehaviour
     [SerializeField]
     private float _speed;
 
-    [SerializeField]
-    private LayerMask _layers;
+    //[SerializeField]
+    //private LayerMask _wals;
 
-    private NavMeshAgent _agent;
+    [SerializeField]
+    private float DistanceToAim = 0.15f;
+
+    protected Animator _animator;
+    protected NavMeshAgent _agent;
     private RaycastHit _hitInfo;
     private Quaternion lastRotation;
     Quaternion lookRotation;
     public bool _behindCheck;
     public bool _wasLeft = false;
     public bool _givingAmmo = false;
-
+    
     protected virtual void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -46,6 +51,7 @@ public abstract class SupportBase : MonoBehaviour
         if ((_player.playerRb.velocity.sqrMagnitude > 0.1f|| (transform.rotation != lastRotation) )&& !_wasLeft && !_givingAmmo) 
         {
             _agent.SetDestination(_anchorPoint.position);
+            _animator.SetBool("isMove", true);
             Vector3 directionToCursor = (_player.playerCurse.position - transform.position).normalized;
             if (_behindCheck)
             {
@@ -56,34 +62,38 @@ public abstract class SupportBase : MonoBehaviour
                  lookRotation = Quaternion.LookRotation(directionToCursor);
             }
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-            _agent.isStopped = _agent.remainingDistance < 0.1f;
+            _agent.isStopped = _agent.remainingDistance < DistanceToAim;
 
-            if (CheckForObstacles())
-            {
-                Vector3 direction = (_anchorPoint.position - _hitInfo.point).normalized;
-                float distanceToMove = (_maxdistance - _hitInfo.distance);
+            //if (CheckForObstacles())
+            //{
+            //    Vector3 direction = (_anchorPoint.position - _hitInfo.point).normalized;
+            //    float distanceToMove = (_maxdistance - _hitInfo.distance);
 
-                if (distanceToMove > 0)
-                {
-                    _anchorPoint.position += direction * distanceToMove * _speed * Time.deltaTime;
-                }
-            }
-            else
-            {
-                _anchorPoint.position = Vector3.Lerp(_anchorPoint.position, _anchorPointDefault.position, Time.deltaTime * _speed);
-            }
+            //    if (distanceToMove > 0)
+            //    {
+            //        _anchorPoint.position += direction * distanceToMove * _speed * Time.deltaTime;
+            //    }
+            //}
+            //else
+            //{
+            //    _anchorPoint.position = Vector3.Lerp(_anchorPoint.position, _anchorPointDefault.position, Time.deltaTime * _speed);
+            //}
         }
         if (_givingAmmo)
         {
             _agent.updateRotation = true;
             _agent.SetDestination(_player.playerTransform.position);
-            _agent.isStopped = _agent.remainingDistance < 0.1f;
-            if(_agent.remainingDistance < 0.1f)
+            _agent.isStopped = _agent.remainingDistance < DistanceToAim;
+            if(_agent.remainingDistance < DistanceToAim)
             {
                 GiveToPlayer();
                 _givingAmmo = false;
                 _agent.updateRotation = false;
             }
+        }
+        else
+        {
+            _animator.SetBool("isMove", false);
         }
 
     }
@@ -96,13 +106,20 @@ public abstract class SupportBase : MonoBehaviour
         _wasLeft = lefted;
         _behindCheck = behind;
     }
-    private bool CheckForObstacles()    
+    public void AssignAnchor(Transform anchor)
     {
-        return Physics.Raycast(transform.position, transform.forward, out _hitInfo, _maxdistance, _layers) ||
-               Physics.Raycast(transform.position, -transform.forward, out _hitInfo, _maxdistance, _layers) ||
-               Physics.Raycast(transform.position, transform.right, out _hitInfo, _maxdistance, _layers) ||
-               Physics.Raycast(transform.position, -transform.right, out _hitInfo, _maxdistance, _layers);
+        _anchorPoint = anchor;
+        //_anchorPointDefault = Instantiate(anchor);
+        
+        
     }
+    //private bool CheckForObstacles()
+    //{
+    //    return Physics.Raycast(transform.position, transform.forward, out _hitInfo, _maxdistance, _wals) ||
+    //           Physics.Raycast(transform.position, -transform.forward, out _hitInfo, _maxdistance, _wals) ||
+    //           Physics.Raycast(transform.position, transform.right, out _hitInfo, _maxdistance, _wals) ||
+    //           Physics.Raycast(transform.position, -transform.right, out _hitInfo, _maxdistance, _wals);
+    //}
 
     private void OnDrawGizmos()
     {

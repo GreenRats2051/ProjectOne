@@ -9,7 +9,6 @@ public class FieldOfView : MonoBehaviour
     public float viewDistance = 20f; 
     public LayerMask obstacleMask; 
     public LayerMask enemyLayerMask; 
-    public LayerMask visibleEnemyLayerMask; 
     private List<Transform> visibleEnemies = new List<Transform>();
     public List<Transform> VisibleEnemies => visibleEnemies;
     private Mesh mesh; 
@@ -26,7 +25,7 @@ public class FieldOfView : MonoBehaviour
     private void LateUpdate()
     {
         GenerateFieldOfView();
-        HandleEnemyVisibility();
+        UpdateInfoOfEnemy();
     }
 
     private void GenerateFieldOfView()
@@ -94,72 +93,16 @@ public class FieldOfView : MonoBehaviour
         return new Vector3(Mathf.Sin(angleRad), 0, Mathf.Cos(angleRad)); // Рассчитываем направление по углу
     }
 
-
-    private float visibilityCooldown = 0.5f; // Задержка в секундах
-    private Dictionary<Transform, float> enemyVisibilityTimers = new Dictionary<Transform, float>();
-
-    private void HandleEnemyVisibility()
+    private void UpdateInfoOfEnemy()
     {
-        visibleEnemies.Clear();
-
-        Collider[] enemiesInView = Physics.OverlapSphere(transform.position, viewDistance, enemyLayerMask);
-        float checkRadius = viewDistance + 1f;
-        foreach (Collider enemyCollider in enemiesInView)
+        foreach(var enemy in visibleEnemies)
         {
-            Transform enemyTransform = enemyCollider.transform;
-            Vector3 directionToEnemy = (enemyTransform.position - transform.position).normalized;
-
-            if (Vector3.Angle(transform.forward, directionToEnemy) < fov / 2f)
+            if (enemy == null)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, directionToEnemy, out hit, viewDistance, obstacleMask | enemyLayerMask))
-                {
-                    bool isVisible = hit.transform == enemyTransform;
-
-                    if (isVisible)
-                    {
-                        // Если враг виден, включаем все рендереры
-                        Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
-                        foreach (Renderer renderer in enemyRenderers)
-                        {
-                            renderer.enabled = true;
-                        }
-                        visibleEnemies.Add(enemyTransform);
-                        enemyVisibilityTimers[enemyTransform] = Time.time + visibilityCooldown; // Устанавливаем таймер
-                    }
-                    else
-                    {
-                        // Если враг скрыт и время видимости ещё не истекло
-                        if (enemyVisibilityTimers.TryGetValue(enemyTransform, out float endTime) && Time.time < endTime)
-                        {
-                            // Включаем рендереры
-                            Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
-                            foreach (Renderer renderer in enemyRenderers)
-                            {
-                                renderer.enabled = true;
-                            }
-                        }
-                        else
-                        {
-                            // Выключаем рендереры
-                            Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
-                            foreach (Renderer renderer in enemyRenderers)
-                            {
-                                renderer.enabled = false;
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                // Враг вне угла обзора, выключаем все рендереры
-                Renderer[] enemyRenderers = enemyTransform.GetComponentsInChildren<Renderer>();
-                foreach (Renderer renderer in enemyRenderers)
-                {
-                    renderer.enabled = false;
-                }
+                visibleEnemies.Remove(enemy);
             }
         }
     }
+
+
 }

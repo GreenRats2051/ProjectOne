@@ -3,18 +3,15 @@ using UnityEngine;
 
 public class GenerateRooms : MonoBehaviour
 {
-    [Header("Spawn Points")]
     [SerializeField] private GameObject mainSpawnPoint;
     [SerializeField] private GameObject leftSpawnPoint;
     [SerializeField] private GameObject rightSpawnPoint;
     [SerializeField] private GameObject centerSpawnPoint;
 
-    [Header("Return Points")]
-    [SerializeField] private GameObject mainSpawnReturnPoint;
-    [SerializeField] private GameObject leftSpawnReturnPoint;
-    [SerializeField] private GameObject rightSpawnReturnPoint;
-    [SerializeField] private GameObject centerSpawnReturnPoint;
-
+    [SerializeField] private GameObject mainReturnPoint;
+    [SerializeField] private GameObject leftReturnPoint;
+    [SerializeField] private GameObject rightReturnPoint;
+    [SerializeField] private GameObject centerReturnPoint;
 
     [Header("Room Settings")]
     [SerializeField] private GameObject roomPrefabT;
@@ -37,8 +34,6 @@ public class GenerateRooms : MonoBehaviour
 
     private void Start()
     {
-
-
         if (canSpawn)
         {
             GenerateInitialRooms();
@@ -63,24 +58,27 @@ public class GenerateRooms : MonoBehaviour
                 break;
         }
     }
-
+    public void GetList(List<Vector3> listget)
+    {
+        occupiedPositions = listget;
+    }
     private void SpawnRoom(Room roomType)
     {
         lock (_lockObject)
         {
-            if (roomCount >= maxRooms) return;
+            if (roomCount >= maxRooms-1) return;
             floorNew = (Floors)Random.Range(0, 3);
-            GameObject prefub = null;
+            GameObject prefab = null;
             switch (floorNew)
             {
                 case Floors.Forward:
-                    prefub = roomPrefabF;
+                    prefab = roomPrefabF;
                     break;
                 case Floors.T_Variant:
-                    prefub = roomPrefabT;
+                    prefab = roomPrefabT;
                     break;
                 case Floors.ThreeWays:
-                    prefub = roomPrefabThree;
+                    prefab = roomPrefabThree;
                     break;
             }
 
@@ -94,7 +92,7 @@ public class GenerateRooms : MonoBehaviour
             }
 
             GameObject newRoom = Instantiate(
-                prefub,
+                prefab,
                 spawnPosition,
                 Quaternion.identity
             );
@@ -102,6 +100,7 @@ public class GenerateRooms : MonoBehaviour
             occupiedPositions.Add(spawnPosition);
 
             var newRoomScript = newRoom.GetComponent<GenerateRooms>();
+            newRoomScript.GetList(occupiedPositions);
             newRoomScript.SetRoomPosition(roomType, floorNew);
 
             LinkRooms(newRoomScript, roomType);
@@ -109,30 +108,29 @@ public class GenerateRooms : MonoBehaviour
         }
     }
 
-
     private void LinkRooms(GenerateRooms newRoom, Room roomType)
     {
         switch (roomType)
         {
             case Room.Right:
-                rightSpawnPoint = newRoom.mainSpawnPoint;
-                newRoom.mainSpawnReturnPoint = rightSpawnReturnPoint;
+                rightReturnPoint = newRoom.mainSpawnPoint;
+                newRoom.mainReturnPoint = rightSpawnPoint;
                 break;
 
             case Room.Left:
-                leftSpawnPoint = newRoom.mainSpawnPoint;
-                newRoom.mainSpawnReturnPoint = leftSpawnReturnPoint;
+                leftReturnPoint = newRoom.mainSpawnPoint;
+                newRoom.mainReturnPoint = leftSpawnPoint;
                 break;
 
             case Room.Center:
-                centerSpawnPoint = newRoom.mainSpawnPoint;
-                newRoom.mainSpawnReturnPoint = centerSpawnReturnPoint;
+                centerReturnPoint = newRoom.mainSpawnPoint;
+                newRoom.mainReturnPoint = centerSpawnPoint;
                 break;
         }
     }
+
     public GameObject SetDoorEnter(Room room)
     {
-
         switch (room)
         {
             case Room.Right:
@@ -145,9 +143,10 @@ public class GenerateRooms : MonoBehaviour
                 return null;
         }
     }
+
     private Vector3 GetRoomOffset(Room roomType)
     {
-        float  offsetZ = 0;
+        float offsetZ = 0;
 
         switch (roomType)
         {

@@ -13,23 +13,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
 
-        ListPlayer.Inst.addPlayer(this.gameObject);
+        ListPlayer.Inst.addPlayer(gameObject);
     }
-    public void GetHit(int damage)
-    {
-        hp -= damage;
-        if (hp == 0)
-        {
-            dead = true;
-        }
-    }
-    public void Healing(int addhp)
-    {
-        if (hp <= hpMax)
-        {
-            hp += addhp;
-        }
-
-    }
+  
     
 }
