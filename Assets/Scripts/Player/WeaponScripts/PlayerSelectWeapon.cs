@@ -8,9 +8,10 @@ public class PlayerSelectWeapon : MonoBehaviour
     [SerializeField]
     private TMP_Text Ammo;
     [SerializeField]
-    private Image currentIconWeapon;
+    private TMP_Text Magazine;
     [SerializeField]
-    private Gun[] playerGun;
+    private Image currentIconWeapon;
+    public Gun[] playerGun;
     public int weaponSwitch;
     private int currentWeaponValue
     {
@@ -22,13 +23,15 @@ public class PlayerSelectWeapon : MonoBehaviour
             {
                 currentIconWeapon.sprite = null;
                 currentIconWeapon.color = new Color(255, 255, 255, 0);
-                Ammo.text = "None";
+                Ammo.text = "";
+                Magazine.text = "";
             }
             else if (playerGun[currentWeapon].GunController != null && playerGun[currentWeapon].IsHavePlayer == true)
             {
                 currentIconWeapon.sprite = playerGun[currentWeapon].iconWeapon;
                 currentIconWeapon.color = new Color(255, 255, 255, 255);
-                Ammo.text = playerGun[currentWeapon].GunController.Ammo + "/" + playerGun[currentWeapon].GunController.Magazine;
+                Ammo.text = playerGun[currentWeapon].GunController.Ammo.ToString();
+                Magazine.text = playerGun[currentWeapon].GunController.Magazine.ToString();
             }
         }
     }

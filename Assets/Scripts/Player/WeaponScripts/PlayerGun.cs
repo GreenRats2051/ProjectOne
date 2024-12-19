@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerGun : MonoBehaviour
 {
     [SerializeField]
     private Transform startShoot;
+    [SerializeField]
+    private Image currentIconWeapon;
     [SerializeField]
     private PlayerGunSettings gunSettings;
     public int Ammo;
@@ -19,6 +22,7 @@ public class PlayerGun : MonoBehaviour
     void Update()
     {
         timeShoot += Time.deltaTime;
+        currentIconWeapon.fillAmount = (float)Ammo / gunSettings.MaxAmmo;
     }
 
     public void Shoot(PlayerMovement playerMovementController)

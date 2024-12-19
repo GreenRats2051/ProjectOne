@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Explode
   - Enemy
-  - Level
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -14,11 +14,11 @@ TagManager:
   - Ignore Raycast Mouse
   - Water
   - UI
-  - Mask
-  - Enemy
-  - Player
-  - Black
-  - Support
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class PlayerHealingDrone : MonoBehaviour
 {
-    private GameObject player;
+    public GameObject player;
     [SerializeField]
     private NavMeshAgent navMeshAgent;
     [SerializeField]
