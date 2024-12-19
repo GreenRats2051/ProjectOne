@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Player")
+        if (collider.GetComponent<PlayerStatistics>())
         {
             if (isHealth)
             {

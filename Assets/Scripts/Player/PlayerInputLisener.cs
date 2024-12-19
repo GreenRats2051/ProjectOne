@@ -14,13 +14,9 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private PlayerUseSmokeGrenade playerSmokeGrenade;
     [SerializeField]
-    private PlayerUseSkill playerUseSkillController;
-    [SerializeField]
     private DroneDestroyer droneDestroyer;
     [SerializeField]
     private DroneHeal droneHeal;
-    [SerializeField]
-    private DeveloperMenu developerMenu;
     [SerializeField]
     private Pause pauseController;
     [SerializeField]
@@ -33,8 +29,6 @@ public class PlayerInputLisener : MonoBehaviour
     private KeyCode buttonReload;
     [SerializeField]
     private KeyCode buttonGrenade;
-    [SerializeField]
-    private KeyCode buttonUseSkill;
     [SerializeField]
     private KeyCode healDrone;
     [SerializeField]
@@ -91,23 +85,6 @@ public class PlayerInputLisener : MonoBehaviour
             {
                 playerSmokeGrenade.Spawn(playerMovementController.MousePoint.position);
             }
-            if (Input.GetKeyDown(buttonUseSkill) && playerUseSkillController != null)
-            {
-                playerUseSkillController.UseSkill();
-            }
-            if (Input.GetKeyDown(healDrone) && playerUseSkillController != null)
-            {
-                droneHeal.CreateDrone();
-            }
-            if (Input.GetKeyDown(explosiveDrone) && playerUseSkillController != null)
-            {
-                droneDestroyer.CreateDrone();
-                
-            }
-        }
-        if (Input.GetKeyDown(buttonOpenDeveloperMenu) && developerMenu != null)
-        {
-            developerMenu.OpenDeveloperMenu();
         }
         if (Input.GetKeyDown(buttonPause) && pauseController != null)
         {
