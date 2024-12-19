@@ -9518,7 +9518,7 @@ Transform:
   m_GameObject: {fileID: 7035408466910076728}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5969305, y: 0, z: 0, w: 0.80229294}
-  m_LocalPosition: {x: 2.5, y: 6.4, z: 1.3}
+  m_LocalPosition: {x: 96.375, y: 6.15, z: 29.425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13274,6 +13274,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3442218060560998946}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 490be6ff8cc49984a8ef731b350a1437,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7862132393724472962}
   m_SourcePrefab: {fileID: 100100000, guid: 490be6ff8cc49984a8ef731b350a1437, type: 3}
 --- !u!4 &2524613332115199886 stripped
 Transform:
@@ -13304,6 +13308,24 @@ MonoBehaviour:
   gunSettings: {fileID: 11400000, guid: ecf604c684a5e5044bbe11406426e191, type: 2}
   Ammo: 30
   Magazine: 120
+--- !u!114 &7862132393724472962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2901139355848494388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &3709528616837423651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13384,6 +13406,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9098925964950846379}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 38722addbc8de814ba3e1a5b562d4ff7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7123506637434590641}
   m_SourcePrefab: {fileID: 100100000, guid: 38722addbc8de814ba3e1a5b562d4ff7, type: 3}
 --- !u!4 &3814652113854711240 stripped
 Transform:
@@ -13414,6 +13440,24 @@ MonoBehaviour:
   gunSettings: {fileID: 11400000, guid: 013ef0363ff640c4fab0e12f02b22d80, type: 2}
   Ammo: 7
   Magazine: 120
+--- !u!114 &7123506637434590641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4592419612904169330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &3778650534610301488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13497,6 +13541,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8811032141077576416}
+    - targetCorrespondingSourceObject: {fileID: 8704739337624522507, guid: 3bf8ca3fcf136514d92b31f2b9b5ffe2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4607602370825931956}
   m_SourcePrefab: {fileID: 100100000, guid: 3bf8ca3fcf136514d92b31f2b9b5ffe2, type: 3}
 --- !u!4 &5185565419519584129 stripped
 Transform:
@@ -13531,6 +13579,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4607602370825931956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529581323984043323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!4 &6469915582167072674 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7906552198607949202, guid: 3bf8ca3fcf136514d92b31f2b9b5ffe2,
@@ -13632,6 +13698,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8232356865387326844}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 517e418beace13e47a398a99b153d52c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 383511541704416305}
   m_SourcePrefab: {fileID: 100100000, guid: 517e418beace13e47a398a99b153d52c, type: 3}
 --- !u!4 &8345025368167315726 stripped
 Transform:
@@ -13662,3 +13732,21 @@ MonoBehaviour:
   gunSettings: {fileID: 0}
   Ammo: 12
   Magazine: 120
+--- !u!114 &383511541704416305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8684256159903523764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 2
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
