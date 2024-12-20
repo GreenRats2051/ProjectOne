@@ -25936,6 +25936,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4168799567010888554, guid: f701084bf198aa640be18785a41fe9dd,
+        type: 3}
+      propertyPath: playerGun.Array.data[1].IsHavePlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168799567010888554, guid: f701084bf198aa640be18785a41fe9dd,
+        type: 3}
+      propertyPath: playerGun.Array.data[2].IsHavePlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168799567010888554, guid: f701084bf198aa640be18785a41fe9dd,
+        type: 3}
+      propertyPath: playerGun.Array.data[3].IsHavePlayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5030169247977118824, guid: f701084bf198aa640be18785a41fe9dd,
         type: 3}
       propertyPath: m_AnchorMax.x

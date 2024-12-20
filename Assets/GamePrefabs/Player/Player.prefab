@@ -1070,7 +1070,7 @@ MonoBehaviour:
   - Weapon: {fileID: 2901139355848494388}
     iconWeapon: {fileID: 21300000, guid: 500c7cbcc6b8dc74f8050a93e4958705, type: 3}
     GunController: {fileID: 3442218060560998946}
-    IsHavePlayer: 0
+    IsHavePlayer: 1
   - Weapon: {fileID: 8684256159903523764}
     iconWeapon: {fileID: 21300000, guid: 7ee33bdaaec16944cbd3bd4ef4d0efe2, type: 3}
     GunController: {fileID: 8232356865387326844}
