@@ -3,8 +3,8 @@ public enum Room
     Left,
     Right,
     Center,
-    MainInterance
-
+    MainInterance,
+    Return
 }
 public enum Floors
 {

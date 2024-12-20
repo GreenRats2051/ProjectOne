@@ -20,8 +20,6 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private DroneHeal droneHeal;
     [SerializeField]
-    private DeveloperMenu developerMenu;
-    [SerializeField]
     private Pause pauseController;
     [SerializeField]
     private KeyCode buttonCrouch;
@@ -104,10 +102,6 @@ public class PlayerInputLisener : MonoBehaviour
                 droneDestroyer.CreateDrone();
                 
             }
-        }
-        if (Input.GetKeyDown(buttonOpenDeveloperMenu) && developerMenu != null)
-        {
-            developerMenu.OpenDeveloperMenu();
         }
         if (Input.GetKeyDown(buttonPause) && pauseController != null)
         {

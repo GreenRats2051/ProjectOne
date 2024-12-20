@@ -216,6 +216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8230677366817179590, guid: 996c6cde220a4ae4880a8e2352150cf4,
+        type: 3}
+      propertyPath: room
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -483,6 +488,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230677366817179590, guid: 996c6cde220a4ae4880a8e2352150cf4,
+        type: 3}
+      propertyPath: room
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -7,7 +7,7 @@ public class GenerateRooms : MonoBehaviour
     [SerializeField] private GameObject leftSpawnPoint;
     [SerializeField] private GameObject rightSpawnPoint;
     [SerializeField] private GameObject centerSpawnPoint;
-
+    [Header("Get points")]
     [SerializeField] private GameObject mainReturnPoint;
     [SerializeField] private GameObject leftReturnPoint;
     [SerializeField] private GameObject rightReturnPoint;
@@ -22,10 +22,12 @@ public class GenerateRooms : MonoBehaviour
     [SerializeField] private float spacingZ;
     [SerializeField] private bool canSpawn = true;
     [SerializeField] private int maxRooms = 20;
+    private GameObject finalRoom;
 
     private List<Vector3> occupiedPositions = new List<Vector3>();
 
     [SerializeField] private Room currentRoomPosition;
+    private static bool finalRoomSet = false;
     private static int roomCount = 0;
     [SerializeField] private Floors floor;
     [SerializeField] private Floors floorNew;
@@ -62,11 +64,26 @@ public class GenerateRooms : MonoBehaviour
     {
         occupiedPositions = listget;
     }
+    public void GetFinishRoom(GameObject obj)
+    {
+        finalRoom = obj;
+    }
+
     private void SpawnRoom(Room roomType)
     {
         lock (_lockObject)
         {
-            if (roomCount >= maxRooms-1) return;
+            if (roomCount >= maxRooms - 1)
+            {
+                if (!finalRoomSet)
+                {
+                    finalRoom = gameObject;
+                    SetFinalRoom();
+                }
+                return;
+            }
+
+
             floorNew = (Floors)Random.Range(0, 3);
             GameObject prefab = null;
             switch (floorNew)
@@ -105,6 +122,22 @@ public class GenerateRooms : MonoBehaviour
 
             LinkRooms(newRoomScript, roomType);
             roomCount++;
+  
+
+        }
+    }
+    
+
+    public void SetFinalRoom()
+    {
+        lock (_lockObject)
+        {
+            if (finalRoomSet) return; 
+            finalRoomSet = true;              }
+
+        foreach (Door door in GetComponentsInChildren<Door>())
+        {
+            door.SetFinal(true); 
         }
     }
 
@@ -134,11 +167,13 @@ public class GenerateRooms : MonoBehaviour
         switch (room)
         {
             case Room.Right:
-                return rightSpawnPoint;
+                return rightReturnPoint;
             case Room.Left:
-                return leftSpawnPoint;
+                return leftReturnPoint;
             case Room.Center:
-                return centerSpawnPoint;
+                return centerReturnPoint;
+            case Room.Return:
+                return mainReturnPoint;
             default:
                 return null;
         }

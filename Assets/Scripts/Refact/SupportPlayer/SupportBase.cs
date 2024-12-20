@@ -11,7 +11,6 @@ public abstract class SupportBase : MonoBehaviour
     //[SerializeField]
     //private Transform _anchorPointDefault;
 
-    [SerializeField]
     private Player _player;
 
     [SerializeField]
@@ -44,6 +43,7 @@ public abstract class SupportBase : MonoBehaviour
         _agent.updateRotation = false;
         lastRotation = transform.rotation;
         ListSupport.Inst.addSupport(gameObject);
+        _player = ListPlayer.Inst._players[0].GetComponent<Player>();
     }
 
     protected virtual void Update()
@@ -63,21 +63,6 @@ public abstract class SupportBase : MonoBehaviour
             }
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
             _agent.isStopped = _agent.remainingDistance < DistanceToAim;
-
-            //if (CheckForObstacles())
-            //{
-            //    Vector3 direction = (_anchorPoint.position - _hitInfo.point).normalized;
-            //    float distanceToMove = (_maxdistance - _hitInfo.distance);
-
-            //    if (distanceToMove > 0)
-            //    {
-            //        _anchorPoint.position += direction * distanceToMove * _speed * Time.deltaTime;
-            //    }
-            //}
-            //else
-            //{
-            //    _anchorPoint.position = Vector3.Lerp(_anchorPoint.position, _anchorPointDefault.position, Time.deltaTime * _speed);
-            //}
         }
         if (_givingAmmo)
         {
@@ -109,17 +94,9 @@ public abstract class SupportBase : MonoBehaviour
     public void AssignAnchor(Transform anchor)
     {
         _anchorPoint = anchor;
-        //_anchorPointDefault = Instantiate(anchor);
         
         
     }
-    //private bool CheckForObstacles()
-    //{
-    //    return Physics.Raycast(transform.position, transform.forward, out _hitInfo, _maxdistance, _wals) ||
-    //           Physics.Raycast(transform.position, -transform.forward, out _hitInfo, _maxdistance, _wals) ||
-    //           Physics.Raycast(transform.position, transform.right, out _hitInfo, _maxdistance, _wals) ||
-    //           Physics.Raycast(transform.position, -transform.right, out _hitInfo, _maxdistance, _wals);
-    //}
 
     private void OnDrawGizmos()
     {

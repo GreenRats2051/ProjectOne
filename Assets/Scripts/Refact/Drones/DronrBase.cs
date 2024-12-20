@@ -24,8 +24,8 @@ public abstract class DronrBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        drone.maxValue = droneLivetime;
-        drone.value = drone.maxValue;
+        //drone.maxValue = droneLivetime;
+        //drone.value = drone.maxValue;
         
     }
 

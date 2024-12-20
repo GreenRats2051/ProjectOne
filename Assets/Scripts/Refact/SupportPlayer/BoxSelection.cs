@@ -12,6 +12,10 @@ public class BoxSelection : MonoBehaviour
     private Vector3 endMousePosition;
     private static List<SupportBase> selectedUnits = new List<SupportBase>();
     public static Action<List<SupportBase>> SelectedUnits;
+    private void Start()
+    {
+        selectableBox = Instantiate(selectableBox);
+    }
 
     private void Update()
     {
