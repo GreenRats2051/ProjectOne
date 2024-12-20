@@ -177,6 +177,7 @@ public class GenerateRooms : MonoBehaviour
             default:
                 return null;
         }
+        
     }
 
     private Vector3 GetRoomOffset(Room roomType)

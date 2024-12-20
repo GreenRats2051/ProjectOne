@@ -30,9 +30,13 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private KeyCode buttonGrenade;
     [SerializeField]
+    private KeyCode buttonUseSkill;
+    [SerializeField]
     private KeyCode healDrone;
     [SerializeField]
     private KeyCode explosiveDrone;
+    [SerializeField]
+    private KeyCode buttonOpenDeveloperMenu;
     [SerializeField]
     private KeyCode buttonPause;
     private float mouseScroll;
@@ -46,15 +50,7 @@ public class PlayerInputLisener : MonoBehaviour
         mouseScroll = Input.GetAxis("Mouse ScrollWheel");
         if (!pauseActive)
         {
-            if (Input.GetKeyDown(explosiveDrone) && !droneDestroyer.IsDroneAllive())
-            {
-                droneDestroyer.CreateDrone();
-            }
-            if (Input.GetKeyDown(healDrone) && !droneHeal.IsDroneAllive())
-            {
-                droneHeal.CreateDrone();
-            }
-            if (droneDestroyer.IsDroneAllive())
+            if(droneDestroyer.IsDroneAllive())
             {
                 MoveDrone= true;
             }
@@ -62,7 +58,7 @@ public class PlayerInputLisener : MonoBehaviour
             {
                 MoveDrone = false;
             }
-            if (playerMovementController != null && !MoveDrone)
+            if (playerMovementController != null&&!MoveDrone)
             {
                 playerMovementController.Walk(inputAction);
                 playerMovementController.Crouch(Input.GetKey(buttonCrouch));
@@ -90,6 +86,15 @@ public class PlayerInputLisener : MonoBehaviour
             if (Input.GetKeyDown(buttonGrenade) && playerSmokeGrenade != null)
             {
                 playerSmokeGrenade.Spawn(playerMovementController.MousePoint.position);
+            }
+            if (Input.GetKeyDown(healDrone) )
+            {
+                droneHeal.CreateDrone();
+            }
+            if (Input.GetKeyDown(explosiveDrone) )
+            {
+                droneDestroyer.CreateDrone();
+                
             }
         }
         if (Input.GetKeyDown(buttonPause) && pauseController != null)

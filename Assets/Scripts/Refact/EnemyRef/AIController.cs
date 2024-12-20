@@ -1,44 +1,38 @@
-
 using UnityEngine;
 using UnityEngine.AI;
 
 public class AIController
 {
+    private float randomPointRadius = 5f;
+    private Vector3 randomPoint;
 
-    private float randomPointRadius = 5f;  
-    Vector3 randomDirection;
-    private Vector3 randomPoint;  
-    public void FindPath(GameObject enemyAgent,Transform player,bool _isTrigered,NavMeshAgent agent)
+    public void FindPath(GameObject enemyAgent, Transform player, bool isTriggered, NavMeshAgent agent)
     {
+        if (isTriggered)
+        {
             float distanceToPlayer = Vector3.Distance(enemyAgent.transform.position, player.position);
-            if (distanceToPlayer > randomPointRadius )   
-            {
-                
-                FindRandomPointNearPlayer(player);           
-                agent.SetDestination(randomPoint);     
-            }
-            else
+
+            if (distanceToPlayer > agent.stoppingDistance)
             {
                 agent.SetDestination(player.position);
             }
-    }
-    void FindRandomPointNearPlayer( Transform player)
-    {
-
-        if (Vector3.Distance(player.position, randomPoint) > randomPointRadius) // Еслиточка все еще в радиусе новуюд не создаем
-        {
-            randomDirection = Random.insideUnitSphere * randomPointRadius;
-            randomDirection += player.position;  
         }
         else
         {
-            return;
-        }
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomDirection, out hit, randomPointRadius, NavMesh.AllAreas))
-        {
-            randomPoint = hit.position;  // Если точка достижима, запоминаем её
+            FindRandomPointNearPlayer(player, agent);
         }
     }
 
+    private void FindRandomPointNearPlayer(Transform player, NavMeshAgent agent)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * randomPointRadius;
+        randomDirection += player.position;
+        randomDirection.y = 0;
+
+        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, randomPointRadius, NavMesh.AllAreas))
+        {
+            randomPoint = hit.position;
+            agent.SetDestination(randomPoint);
+        }
+    }
 }

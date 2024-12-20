@@ -55,7 +55,7 @@ public class SupportShooter : SupportBase
             rilfeObj.SetActive(rilfe);
             pistolObj.SetActive(pistol);
         }
-        field = GetComponent<FieldOfView>();
+        field = GetComponentInChildren<FieldOfView>();
         InitializeLineRenderer();
     }
     protected override void Update()
