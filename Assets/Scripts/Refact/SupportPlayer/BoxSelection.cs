@@ -90,7 +90,7 @@ public class BoxSelection : MonoBehaviour
 
         foreach (Collider col in colliders)
         {
-            if (col.gameObject.layer == 10)
+            if (((1 << col.gameObject.layer) & selectableLayer) != 0)
             {
                 SupportBase supportBase = col.GetComponent<SupportBase>();
                 if (supportBase != null)

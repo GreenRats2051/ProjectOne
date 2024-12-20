@@ -29,6 +29,7 @@ public class Door : MonoBehaviour
             rendererDor.material.color = Color.red;
         }
     }
+ 
 
     public void SetState(bool active)
     {
