@@ -6,6 +6,7 @@
       "source": "builtin",
       "dependencies": {}
     },
+<<<<<<< Updated upstream
     "com.unity.2d.tilemap": {
       "version": "1.0.0",
       "depth": 0,
@@ -43,6 +44,8 @@
       },
       "url": "https://packages.unity.com"
     },
+=======
+>>>>>>> Stashed changes
     "com.unity.burst": {
       "version": "1.8.17",
       "depth": 1,

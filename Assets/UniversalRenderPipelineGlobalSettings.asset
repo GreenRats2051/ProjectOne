@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   k_AssetVersion: 3
 <<<<<<< Updated upstream:Assets/UniversalRenderPipelineGlobalSettings.asset
+<<<<<<< Updated upstream:Assets/UniversalRenderPipelineGlobalSettings.asset
   m_RenderingLayerNames:
   - Default
   m_ValidRenderingLayers: 1
@@ -26,6 +27,8 @@ MonoBehaviour:
   lightLayerName6: 
   lightLayerName7: 
 =======
+=======
+>>>>>>> Stashed changes:Assets/Assets/UnityRegistry/Urp/UniversalRenderPipelineGlobalSettings.asset
   lightLayerName0: Light Layer default
   lightLayerName1: Light Layer 1
   lightLayerName2: Light Layer 2
