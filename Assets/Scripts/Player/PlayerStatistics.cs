@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerStatistics : MonoBehaviour
@@ -18,6 +19,11 @@ public class PlayerStatistics : MonoBehaviour
         {
             health = value;
             healthSlider.value = health;
+            if (health <= 0)
+            {
+                health = 0;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
     [SerializeField]
@@ -31,6 +37,10 @@ public class PlayerStatistics : MonoBehaviour
         {
             armor = value;
             armorSlider.value = armor;
+            if (armor <= 0)
+            {
+                armor = 0;
+            }
         }
     }
 
@@ -40,7 +50,7 @@ public class PlayerStatistics : MonoBehaviour
         armorValue = maxArmor;
         healthSlider.maxValue = maxHealth;
         armorSlider.maxValue = maxArmor;
-        healthSlider.value = healthValue;
+        healthSlider.value = health;
         armorSlider.value = armor;
     }
 
@@ -54,10 +64,6 @@ public class PlayerStatistics : MonoBehaviour
         {
             healthValue -= damage;
         }
-        else if (healthValue < 1)
-        {
-            Destroy(gameObject);
-        }
     }
 
     public void Healing(int plusHealth)
@@ -70,9 +76,9 @@ public class PlayerStatistics : MonoBehaviour
 
     public void Armoring()
     {
-        if (armorValue > 0)
+        if (armorValue >= 0)
         {
-            armorValue++;
+            armorValue += 2;
         }
     }
 }

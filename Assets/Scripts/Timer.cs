@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class Timer : MonoBehaviour
         if (timer <= 0)
         {
             timer = 0;
-            // ¬ыполн€ем какие-то действи€ по окончанию времени
+            SceneManager.LoadScene(4);
         }
 
         if (Time.time > nextSpawnTime)
