@@ -8,11 +8,18 @@ public class Door : MonoBehaviour
     public bool isFinal = false;
     [SerializeField] GameObject targetRoom;
     [SerializeField] private Renderer rendererDor;
+    GenerateRooms generator;
 
     private void Start()
     {
-        GenerateRooms generator = GetComponentInParent<GenerateRooms>();
-         targetRoom = generator.SetDoorEnter(room);
+        updateinfo();
+         generator = GetComponentInParent<GenerateRooms>();
+
+    }
+ 
+    public void updateinfo()
+    {
+        targetRoom = generator.SetDoorEnter(room);
 
         if (targetRoom != null)
         {
@@ -29,8 +36,6 @@ public class Door : MonoBehaviour
             rendererDor.material.color = Color.red;
         }
     }
- 
-
     public void SetState(bool active)
     {
         gameObject.SetActive(active);

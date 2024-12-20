@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorTrigger : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class DoorTrigger : MonoBehaviour
     private bool isPlayerInRange = false;
     private GameObject player;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private string scene;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,11 +29,15 @@ public class DoorTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.F)) 
+        if (isPlayerInRange && Input.GetKeyDown(KeyCode.G)) 
         {
             if (door != null && door.isConnected) 
             {
                 TeleportPlayer(); 
+            }
+            if (door.isFinal)
+            {
+                SceneManager.LoadScene(scene);
             }
         }
     }
