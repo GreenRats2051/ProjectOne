@@ -7,8 +7,8 @@ public class EnemyMelee : EnemyBase
     [Header("Melee Settings")]
     [SerializeField]
     private int meleeDistance;
-    [SerializeField] private List<Vector3> patrolPoints = new List<Vector3>(); 
-    [SerializeField] private Animator animator; 
+    [SerializeField] private List<Vector3> patrolPoints;
+    [SerializeField] private Animator animator;
     private int currentPatrolIndex = -1;
     private bool isOnAttackDistance;
     AnimatorStateInfo stateInfo;
@@ -16,7 +16,7 @@ public class EnemyMelee : EnemyBase
     {
         if (target != null)
         {
-            if ( Vector3.Distance(gameObject.transform.position, target.transform.position) <= meleeDistance)
+            if (Vector3.Distance(gameObject.transform.position, target.transform.position) <= meleeDistance)
             {
                 isOnAttackDistance = true;
                 agent.isStopped = true;
@@ -28,7 +28,6 @@ public class EnemyMelee : EnemyBase
             }
         }
     }
-
 
     protected override void Patrol()
     {
@@ -42,10 +41,8 @@ public class EnemyMelee : EnemyBase
         }
     }
 
-
     protected override void Animate()
     {
-
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         animator.SetBool("Dead", _dead);
 
@@ -71,7 +68,6 @@ public class EnemyMelee : EnemyBase
             agent.velocity = Vector3.zero;
         }
     }
-
 
     protected override void Start()
     {

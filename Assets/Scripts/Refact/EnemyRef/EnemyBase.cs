@@ -45,7 +45,7 @@ public abstract class EnemyBase : MonoBehaviour
                 agent.isStopped = true;
                 FindPlayerInRange();
             }
-            else
+            else if (_isTrigered)
             {
                 agent.isStopped = false;
                 Patrol();

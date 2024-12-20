@@ -21,8 +21,8 @@ public class DroneDestroyer : DronrBase
 
     void Explode()
     {
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        Instantiate(explosionEffect, instDrone.transform.position, Quaternion.identity);
+        Collider[] colliders = Physics.OverlapSphere(instDrone.transform.position, explosionRadius);
         foreach (Collider nearbyObject in colliders)
         {
             Rigidbody rigidbody = nearbyObject.GetComponent<Rigidbody>();
@@ -41,7 +41,7 @@ public class DroneDestroyer : DronrBase
                 playerStatistics.GetHit(5);
             }
         }
-        Destroy(gameObject, destroyDelay);
+        Destroy(instDrone, destroyDelay);
     }
     internal override void ActionDrone(float valueH, float valueV,bool boolValue)
     {
@@ -49,7 +49,7 @@ public class DroneDestroyer : DronrBase
         if (boolValue)
         {
             Explode();
-            Destroy(gameObject);
+            Destroy(instDrone);
         }
     }
 }

@@ -14,8 +14,6 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private PlayerUseSmokeGrenade playerSmokeGrenade;
     [SerializeField]
-    private PlayerUseSkill playerUseSkillController;
-    [SerializeField]
     private DroneDestroyer droneDestroyer;
     [SerializeField]
     private DroneHeal droneHeal;
@@ -32,13 +30,9 @@ public class PlayerInputLisener : MonoBehaviour
     [SerializeField]
     private KeyCode buttonGrenade;
     [SerializeField]
-    private KeyCode buttonUseSkill;
-    [SerializeField]
     private KeyCode healDrone;
     [SerializeField]
     private KeyCode explosiveDrone;
-    [SerializeField]
-    private KeyCode buttonOpenDeveloperMenu;
     [SerializeField]
     private KeyCode buttonPause;
     private float mouseScroll;
@@ -52,7 +46,15 @@ public class PlayerInputLisener : MonoBehaviour
         mouseScroll = Input.GetAxis("Mouse ScrollWheel");
         if (!pauseActive)
         {
-            if(droneDestroyer.IsDroneAllive())
+            if (Input.GetKeyDown(explosiveDrone) && !droneDestroyer.IsDroneAllive())
+            {
+                droneDestroyer.CreateDrone();
+            }
+            if (Input.GetKeyDown(healDrone) && !droneHeal.IsDroneAllive())
+            {
+                droneHeal.CreateDrone();
+            }
+            if (droneDestroyer.IsDroneAllive())
             {
                 MoveDrone= true;
             }
@@ -60,7 +62,7 @@ public class PlayerInputLisener : MonoBehaviour
             {
                 MoveDrone = false;
             }
-            if (playerMovementController != null&&!MoveDrone)
+            if (playerMovementController != null && !MoveDrone)
             {
                 playerMovementController.Walk(inputAction);
                 playerMovementController.Crouch(Input.GetKey(buttonCrouch));
@@ -88,19 +90,6 @@ public class PlayerInputLisener : MonoBehaviour
             if (Input.GetKeyDown(buttonGrenade) && playerSmokeGrenade != null)
             {
                 playerSmokeGrenade.Spawn(playerMovementController.MousePoint.position);
-            }
-            if (Input.GetKeyDown(buttonUseSkill) && playerUseSkillController != null)
-            {
-                playerUseSkillController.UseSkill();
-            }
-            if (Input.GetKeyDown(healDrone) && playerUseSkillController != null)
-            {
-                droneHeal.CreateDrone();
-            }
-            if (Input.GetKeyDown(explosiveDrone) && playerUseSkillController != null)
-            {
-                droneDestroyer.CreateDrone();
-                
             }
         }
         if (Input.GetKeyDown(buttonPause) && pauseController != null)

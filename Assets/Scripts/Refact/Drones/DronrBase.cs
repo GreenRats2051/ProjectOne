@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public abstract class DronrBase : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public abstract class DronrBase : MonoBehaviour
     protected virtual void ActionDrone(){}
     internal virtual void ActionDrone(float valueF1,float valueF2, bool boolValue1 )
     {
-        gameObject.transform.position += new Vector3(valueF1, 0, valueF2) * Time.deltaTime;
+        instDrone.transform.position += new Vector3(valueF1, 0, valueF2) * Time.deltaTime * 5;
     }
     public bool IsDroneAllive()
     {
@@ -45,7 +44,7 @@ public abstract class DronrBase : MonoBehaviour
         {
             drone.maxValue = droneLivetime;
             drone.value = drone.maxValue;
-            instDrone = Instantiate(prefubDrone, target.transform.position + new Vector3(1, 1, 0), target.transform.rotation);
+            instDrone = Instantiate(prefubDrone, target.transform.position, target.transform.rotation);
             StartCoroutine(DestroyAfterLifetime());
         }
         if (droneTrack)
