@@ -3,36 +3,41 @@ using UnityEngine.AI;
 
 public class AIController
 {
+
     private float randomPointRadius = 5f;
+    Vector3 randomDirection;
     private Vector3 randomPoint;
-
-    public void FindPath(GameObject enemyAgent, Transform player, bool isTriggered, NavMeshAgent agent)
+    public void FindPath(GameObject enemyAgent, Transform player, bool _isTrigered, NavMeshAgent agent)
     {
-        if (isTriggered)
+        float distanceToPlayer = Vector3.Distance(enemyAgent.transform.position, player.position);
+        if (distanceToPlayer > randomPointRadius)
         {
-            float distanceToPlayer = Vector3.Distance(enemyAgent.transform.position, player.position);
 
-            if (distanceToPlayer > agent.stoppingDistance)
-            {
-                agent.SetDestination(player.position);
-            }
+            FindRandomPointNearPlayer(player);
+            agent.SetDestination(randomPoint);
         }
         else
         {
-            FindRandomPointNearPlayer(player, agent);
+            agent.SetDestination(player.position);
         }
     }
-
-    private void FindRandomPointNearPlayer(Transform player, NavMeshAgent agent)
+    void FindRandomPointNearPlayer(Transform player)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * randomPointRadius;
-        randomDirection += player.position;
-        randomDirection.y = 0;
 
-        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, randomPointRadius, NavMesh.AllAreas))
+        if (Vector3.Distance(player.position, randomPoint) > randomPointRadius) 
         {
-            randomPoint = hit.position;
-            agent.SetDestination(randomPoint);
+            randomDirection = Random.insideUnitSphere * randomPointRadius;
+            randomDirection += player.position;
+        }
+        else
+        {
+            return;
+        }
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomDirection, out hit, randomPointRadius, NavMesh.AllAreas))
+        {
+            randomPoint = hit.position;  
         }
     }
+
 }

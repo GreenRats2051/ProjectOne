@@ -39,7 +39,6 @@ public class PlayerGun : MonoBehaviour
             GameObject CurrentBulletObject = Instantiate(gunSettings.Bullet, startShoot.position, startShoot.rotation);
             CurrentBulletObject.transform.forward = DirWithSpread.normalized;
             CurrentBulletObject.GetComponent<Rigidbody>().AddForce(DirWithSpread.normalized * gunSettings.ShootForce, ForceMode.Impulse);
-            CurrentBulletObject.AddComponent<PlayerBullet>();
             CurrentBulletObject.GetComponent<PlayerBullet>().Damage = gunSettings.Damage;
             Destroy(CurrentBulletObject, gunSettings.TimeDestroyBullet);
         }

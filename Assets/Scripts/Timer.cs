@@ -39,6 +39,6 @@ public class Timer : MonoBehaviour
     {
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
         int enemyIndex = Random.Range(0, spawnPoints.Length);
-        //Instantiate(enemyPrefab[enemyIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
+        Instantiate(enemyPrefab[enemyIndex], spawnPoints[spawnPointIndex].position, Quaternion.identity);
     }
 }

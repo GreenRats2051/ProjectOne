@@ -31,7 +31,7 @@ public class EnemyMelee : EnemyBase
 
     protected override void Patrol()
     {
-        if (patrolPoints.Count > 1 && !_isTriggered)
+        if (patrolPoints.Count > 1 && !_isTrigered)
         {
             if (agent.remainingDistance < 0.5f)
             {
@@ -44,7 +44,7 @@ public class EnemyMelee : EnemyBase
     protected override void Animate()
     {
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        animator.SetBool("Dead", _isDead);
+        animator.SetBool("Dead", _dead);
 
         if (!stateInfo.IsName("Dead"))
         {

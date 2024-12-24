@@ -1018,8 +1018,10 @@ MonoBehaviour:
   buttonShoot: 323
   buttonReload: 114
   buttonGrenade: 102
+  buttonUseSkill: 0
   healDrone: 257
   explosiveDrone: 258
+  buttonOpenDeveloperMenu: 0
   buttonPause: 27
 --- !u!114 &7547993709102691451
 MonoBehaviour:
@@ -2695,7 +2697,7 @@ Transform:
   m_GameObject: {fileID: 1810307801890684928}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.5, z: 0}
+  m_LocalPosition: {x: 0, y: 4.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

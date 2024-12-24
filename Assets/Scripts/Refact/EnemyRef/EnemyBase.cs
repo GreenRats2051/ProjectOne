@@ -8,23 +8,22 @@ public abstract class EnemyBase : MonoBehaviour
 {
     public Action GoToSleep;
     public int Power => _power;
-
     [Header("Base Settings")]
-    [SerializeField] protected int attackRadius = 10;
+    [SerializeField] protected int attackRadius;
     [SerializeField] protected int _power = 1;
     [SerializeField] protected int Health = 3;
     [SerializeField] protected NavMeshAgent agent;
-    [SerializeField] protected bool _isTriggered = false;
+    [SerializeField] protected bool _isTrigered = false;
     [SerializeField] protected bool _isSleep = false;
-    [SerializeField] protected bool _isDead = false;
+    [SerializeField] protected bool _dead = false;
     [SerializeField] protected LayerMask layer;
-    [SerializeField] private float stoppingDistance = 1.5f;
+    [SerializeField] private float minDistanceToTarget = 1.5f;
 
     private List<GameObject> _players = new List<GameObject>();
-    private List<GameObject> _supports = new List<GameObject>();
+    private List<GameObject> supports = new List<GameObject>();
     protected GameObject target;
+    private AIController _agent;
     private Collider[] hitColliders;
-
     protected abstract void AttackPlayer();
     protected abstract void Patrol();
     protected abstract void Animate();
@@ -32,108 +31,97 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = stoppingDistance; // Настраиваем остановку перед целью
+        _agent = new();
         _players = ListPlayer.Inst._players;
-        _supports = ListSupport.Inst._supports;
+        supports = ListSupport.Inst._supports;
     }
-
     protected void Update()
     {
         Animate();
-
-        if (_isDead)
+        if (!_dead)
         {
-            agent.isStopped = true;
-            return;
-        }
-
-        if (_isSleep)
-        {
-            agent.isStopped = true;
-            FindPlayerInRange();
-        }
-        else
-        {
-            agent.isStopped = false;
-            Patrol();
-
-            if (_isTriggered)
+            if (_isSleep)
             {
-                FollowTarget();
-            }
-            else if (_isTrigered)
-            {
+                agent.isStopped = true;
                 FindPlayerInRange();
             }
+            else
+            {
+                agent.isStopped = false;
+                Patrol();
+                AttackPlayer();
+                if (_isTrigered)
+                {
+                    CheckPlayerInRange();
+                }
+                else if (!_isTrigered)
+                {
+                    FindPlayerInRange();
+                }
+            }
+
         }
     }
 
-    private void FindPlayerInRange()
+    private void CheckPlayerInRange()
     {
-        _isTriggered = false;
         target = null;
+        _isTrigered = false;
 
         foreach (var player in _players)
         {
-            if (IsPlayerInRange(player))
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            Vector3 directionToPlayer = player.transform.position - transform.position;
+
+
+            if (distance < attackRadius && Vector3.Angle(transform.forward, directionToPlayer) < 90)
             {
                 target = player;
-                _isTriggered = true;
-                _isSleep = false;
-
-                // Активируем других врагов в радиусе
-                ActivateNearbyEnemies();
+                _isTrigered = true;
                 return;
             }
         }
     }
 
-    private bool IsPlayerInRange(GameObject player)
+    private bool FindPlayerInRange()
     {
-        float distance = Vector3.Distance(player.transform.position, transform.position);
-        Vector3 directionToPlayer = player.transform.position - transform.position;
-
-        return distance < attackRadius && Vector3.Angle(transform.forward, directionToPlayer) < 90;
-    }
-
-    private void FollowTarget()
-    {
-        if (target == null || Vector3.Distance(target.transform.position, transform.position) > attackRadius)
+        bool find = false;
+        foreach (var player in _players)
         {
-            _isTriggered = false;
-            return;
-        }
-
-        if (Vector3.Distance(transform.position, target.transform.position) > agent.stoppingDistance)
-        {
-            agent.SetDestination(target.transform.position);
-        }
-    }
-
-    private void ActivateNearbyEnemies()
-    {
-        hitColliders = Physics.OverlapSphere(transform.position, attackRadius, layer);
-
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider.TryGetComponent(out EnemyBase enemy) && enemy != this)
+            if (Vector3.Distance(player.transform.position, transform.position) < attackRadius
+                && Vector3.Angle(gameObject.transform.forward, player.transform.position - transform.position) < 90)
             {
-                enemy._isSleep = false;
+                target = player;
+                _isTrigered = true;
+                find = true;
+                _isSleep = false;
+                hitColliders = Physics.OverlapSphere(transform.position, attackRadius);
+                foreach (var hitCollider in hitColliders)
+                {
+
+                    if ((layer.value & (1 << hitCollider.gameObject.layer)) != 0)
+                    {
+                        if (hitCollider.TryGetComponent(out EnemyBase enemy))
+                        {
+                            enemy._isSleep = false;
+                        }
+                    }
+                    _agent.FindPath(gameObject, target.transform, _isTrigered, agent);
+                }
             }
+
         }
+        return find;
     }
 
     public void GetHit(int damage)
     {
         Health -= damage;
-
-        if (Health <= 0)
+        if (Health == 0)
         {
-            _isDead = true;
-            agent.isStopped = true;
+            _dead = true;
         }
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -152,4 +140,5 @@ public abstract class EnemyBase : MonoBehaviour
             }
         }
     }
+
 }

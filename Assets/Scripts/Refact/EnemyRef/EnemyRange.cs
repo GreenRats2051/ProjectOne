@@ -102,7 +102,7 @@ public class EnemyRange : EnemyBase
 
     protected override void Patrol()
     {
-        if (patrolPoints.Count <= 1 || isOnAttackDistance || _isTriggered) return;
+        if (patrolPoints.Count <= 1 || isOnAttackDistance || _isTrigered) return;
 
         if (agent.remainingDistance < 0.5f)
         {
@@ -120,7 +120,7 @@ public class EnemyRange : EnemyBase
     private void UpdateAnimatorStates()
     {
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        animator.SetBool("Dead", _isDead);
+        animator.SetBool("Dead", _dead);
         animator.SetBool("IsRunning", agent.velocity.magnitude > 0.1f);
 
         if (stateInfo.IsName("Melee"))
@@ -136,7 +136,7 @@ public class EnemyRange : EnemyBase
 
     private void ManageLineRenderer()
     {
-        if (isOnAttackDistance && !isShooting && !_isDead)
+        if (isOnAttackDistance && !isShooting && !_dead)
         {
             if (shootingCoroutine == null)
                 lineRenderer.enabled = true;
